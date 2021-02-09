@@ -3,6 +3,7 @@ var gulp = require('gulp');
 // gulp plugins and utils
 var gutil = require('gulp-util');
 var livereload = require('gulp-livereload');
+var nodemon = require('gulp-nodemon');
 var postcss = require('gulp-postcss');
 var sourcemaps = require('gulp-sourcemaps');
 var zip = require('gulp-zip');
