@@ -15,7 +15,7 @@ REPO = CONFIG["repo"]
 SOURCE_BRANCH = CONFIG["branch"]
 DESTINATION_BRANCH = "gh-pages"
 CNAME = CONFIG["CNAME"]
-
+GIT_URL = "https://github.com/oueya1479/oueya1479.github.io"
 def check_destination
   unless Dir.exist? CONFIG["destination"]
     sh "git clone https://$GIT_NAME:$GH_TOKEN@github.com/#{USERNAME}/#{REPO}.git #{CONFIG["destination"]}"
