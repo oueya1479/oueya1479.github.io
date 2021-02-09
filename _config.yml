@@ -70,8 +70,13 @@ feed:
 # or "master" otherwise
 safe: False
 lsi: False
+<<<<<<< HEAD
 username: ICCHOI
 repo: develog
+=======
+username: oueya1479
+repo: oueya1479.github.io
+>>>>>>> d679a4fb9355eed6b0b1faccfebc118fef0bd5a2
 branch: master
 relative_source: ../develog/
 destination: ./output/
