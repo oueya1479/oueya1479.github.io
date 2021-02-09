@@ -2,9 +2,8 @@
 .DS_Store
 
 # Jekyll build
-/output
+/_site/
 .jekyll-metadata
-
 #Gemfile.lock
 
 # webstorm
@@ -12,6 +11,7 @@
 
 # others
 *.swp
+package-lock.json
 
 # site build
 *.gem
