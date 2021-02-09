@@ -1,39 +1,99 @@
 ---
-layout: default
-current: home
-class: 'home-template'
-navigation: True
+title: Dopetrope
+layout: landing
 ---
+  
+	<body class="homepage">
+	{% include header_landing.html %}
 
-<!-- < default -->
-<!-- The tag above means: insert everything in this file
-into the {body} of the default.hbs template -->
+		<!-- Main -->
+			<div id="main-wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="12u">
 
-<!-- The big featured header, it uses blog cover image as a BG if available -->
-<header class="site-header outer {% if page.cover or site.cover %}" style="background-image:  url({{ site.baseurl }}{% if page.cover %}{{ page.cover }}{% elsif site.cover %}{{ site.cover }}{% endif %}) {% else %}no-cover{% endif %}">
-    <div class="inner">
-        <div class="site-header-content">
-            <h1 class="site-title">
-                {% if site.logo %}
-                    <img class="site-logo" src="{{ site.baseurl }}{{ site.logo }}" alt="{{ site.title }}"/>
-                {% else %}
-                    {{ site.title }}
-                {% endif %}
-            </h1>
-            <h2 class="site-description">{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}</h2>
-        </div>
-        {% include site-nav.html %}
-    </div>
-</header>
+							<!-- Portfolio -->
+								<section>
+									<header class="major">
+										<h2>My Portfolio</h2>
+									</header>
+									<div class="row">
+										<div class="4u">
+											<section class="box">
+												<a href="#" class="image featured"><img src="{{ site.baseurl }}/assets/images/pic02.jpg" alt="" /></a>
+												<header>
+													<h3>Ipsum feugiat et dolor</h3>
+												</header>
+												<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros lorem blandit  adipiscing et feugiat phasellus tempus dolore ipsum lorem dolore.</p>
+												<footer>
+													<a href="#" class="button alt">Find out more</a>
+												</footer>
+											</section>
+										</div>
+										<div class="4u">
+											<section class="box">
+												<a href="#" class="image featured"><img src="{{ site.baseurl }}/assets/images/pic03.jpg" alt="" /></a>
+												<header>
+													<h3>Sed etiam lorem nulla</h3>
+												</header>
+												<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros lorem blandit  adipiscing et feugiat phasellus tempus dolore ipsum lorem dolore.</p>
+												<footer>
+													<a href="#" class="button alt">Find out more</a>
+												</footer>
+											</section>
+										</div>
+										<div class="4u">
+											<section class="box">
+												<a href="#" class="image featured"><img src="{{ site.baseurl }}/assets/images/pic04.jpg" alt="" /></a>
+												<header>
+													<h3>Consequat et tempus</h3>
+												</header>
+												<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros lorem blandit  adipiscing et feugiat phasellus tempus dolore ipsum lorem dolore.</p>
+												<footer>
+													<a href="#" class="button alt">Find out more</a>
+												</footer>
+											</section>
+										</div>
+									</div>
+									<div class="row">
+										<div class="4u">
+											<section class="box">
+												<a href="#" class="image featured"><img src="{{ site.baseurl }}/assets/images/pic05.jpg" alt="" /></a>
+												<header>
+													<h3>Blandit sed adipiscing</h3>
+												</header>
+												<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros lorem blandit  adipiscing et feugiat phasellus tempus dolore ipsum lorem dolore.</p>
+												<footer>
+													<a href="#" class="button alt">Find out more</a>
+												</footer>
+											</section>
+										</div>
+										<div class="4u">
+											<section class="box">
+												<a href="#" class="image featured"><img src="{{ site.baseurl }}/assets/images/pic06.jpg" alt="" /></a>
+												<header>
+													<h3>Etiam nisl consequat</h3>
+												</header>
+												<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros lorem blandit  adipiscing et feugiat phasellus tempus dolore ipsum lorem dolore.</p>
+												<footer>
+													<a href="#" class="button alt">Find out more</a>
+												</footer>
+											</section>
+										</div>
+										<div class="4u">
+											<section class="box">
+												<a href="#" class="image featured"><img src="{{ site.baseurl }}/assets/images/pic07.jpg" alt="" /></a>
+												<header>
+													<h3>Dolore nisl feugiat</h3>
+												</header>
+												<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros lorem blandit  adipiscing et feugiat phasellus tempus dolore ipsum lorem dolore.</p>
+												<footer>
+													<a href="#" class="button alt">Find out more</a>
+												</footer>
+											</section>
+										</div>
+									</div>
+								</section>
 
-<!-- The main content area -->
-<main id="site-main" class="site-main outer" role="main">
-    <div class="inner">
-
-        <div class="post-feed">
-            <!-- The tag below includes the markup for each post - partials/post-card.hbs -->
-            {%  include post-card.html %}
-        </div>
-
-    </div>
-</main>
+						</div>
+					</div>
