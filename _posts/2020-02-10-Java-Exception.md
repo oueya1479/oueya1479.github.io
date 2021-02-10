@@ -1,5 +1,5 @@
 ---
-date: 2021-02-10T09:43:05.000Z
+date: 2021-02-10 09:43:05
 layout: java
 title: Java interface
 subtitle: 'Java_예외 처리'
@@ -14,6 +14,7 @@ author: Dongheon, Kim
 paginate: true
 ---
 
+<!--page-->
 # Exception
 
 Java에서 compile를 하다 보면 일반 오류가 나와 실행하지 못하는 경우가 있다.
