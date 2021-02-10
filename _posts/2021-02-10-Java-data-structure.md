@@ -1,4 +1,3 @@
-
 ---
 date: 2021-02-10T09:43:05.000Z
 layout: post
@@ -14,6 +13,7 @@ tags:
 author: Dongheon, Kim
 paginate: true
 ---
+
 # 자료 구조
 
 자료 구조는 데이터를 저장하는 구조이다.
