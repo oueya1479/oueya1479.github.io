@@ -1,10 +1,18 @@
-.post {
-  position: relative;
-  top: rem(30px);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
 
-  @include media(">=sm") {
-    top: rem(50px);
-  }
+<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css' >
+* {
+    font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
+}
+
+.post {
+    font-family: 'Spoqa Han Sans';
+    position: relative;
+    top: rem(30px);
+
+    @include media(">=sm") {
+        top: rem(50px);
+    }
 }
 
 .post.two-columns {
