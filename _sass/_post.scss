@@ -1,12 +1,7 @@
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
-
-<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css' >
-* {
-    font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
-}
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 .post {
-    font-family: 'Spoqa Han Sans';
+    font-family: 'Nanum Gothic', sans-serif;
     position: relative;
     top: rem(30px);
 
