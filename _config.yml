@@ -1,104 +1,74 @@
-# Site Settings
-name: Flutheon
-title: Flutheon
-description: Programming in my daily life
-  Thiago Rossener.
-tags:
-  - blog
-  - template
-  - jekyll
-  - theme
-  - netlify
-show_hero: true
-menu:
-  - title: Home
-    url: /
-  - title: About
-    url: /about
-  - title: Contact
-    url: /contact
-  - title: Feed
-    url: /feed.xml
-email: oueya1479@naver.com
-disqus_username: Dongheon, Kim
+lang:                  en
+title:                 Hydejack
+copyright:             © 2021. All rights reserved.
 
+accent_image:          /assets/img/sidebar-bg.jpg
+accent_color:          rgb(79,177,186)
+theme_color:           rgb(25,55,71)
 
-# Social Media Settings
-# Remove the item if you don't need it
-github_username: oueya1479
-facebook_username: facebook_username
-twitter_username: twitter_username
-instagram_username: instagram_username
-linkedin_username: linkedin_username
-medium_username: medium_username
+google_fonts:          Roboto+Slab:700|Noto+Sans:400,400i,700,700i
+font:                  Noto Sans, Helvetica, Arial, sans-serif
+font_heading:          Roboto Slab, Helvetica, Arial, sans-serif
+font-code:             ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
+hydejack:
+  post_addons:         [about, newsletter, related, random, comments]
+  project_addons:      [about, newsletter, other, comments]
 
-# Posts Settings
-show_time_bar: true
-show_modal_on_exit: false
-show_modal_on_finish_post: true
-two_columns_layout: true
+  no_mark_external:    false
+  no_push_state:       false
+  no_drawer:           false
+  no_navbar:           false
+  no_search:           false
+  no_inline_css:       false
+  no_page_style:       false
+  no_break_layout:     true
+  no_toc:              false
+  no_third_column:     false
+  no_large_headings:   false
+  no_structured_data:  false
+  no_theme_color:      false
+  no_breadcrumbs:      false
 
+  use_lsi:             true
+  cookies_banner:      true
+  advertise:           true
+  hide_dates:          false
+  hide_last_modified:  false
 
-# Advanced Settings
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://oueya1479.github.io" # the base hostname & protocol for your site
-google_analytics: "UA-XXXXXXXX-X"
-language: "en"
-categories_folder: category
-sent_message_url: "/contact/message-sent/"
+  dark_mode:
+    always:            false
+    dynamic:           true
+    sunrise:           6
+    sunset:            18
+    icon:              true
 
+  offline:
+    enabled:           false
+    cache_version:     1
+    precache_assets:
+      - /assets/img/swipe.svg
 
-# Build settings
-markdown: kramdown
-highlighter: rouge
-permalink: /:title/
-collections:
-  authors:
-    output: true
-paginate_path: "/page/:num/"
-show_get_theme_btn: true
-use_logo: false
+optional_front_matter:
+  remove_originals:    true
 
-# Content paginator
-paginate_content:
-  enabled: true
-  debug: false
-  collections:
-    - posts
-  auto: false
-  separator: "--page-break--"
-  permalink: "/:num/"
-  seo_canonical: true
-  properties:
-    part:
-      is_generated: true
-    last:
-      is_generated: true
-    single:
-      is_generated: true
+readme_index:
+  remove_originals:    true
+  with_frontmatter:    true
 
-# SASS
+relative_links:
+  collections:         true
+
+titles_from_headings:
+  strip_title:         true
+  collections:         true
+
+compress_html:
+  comments:            ["<!-- ", " -->"]
+  clippings:           all
+  endings:             all
+  ignore:
+    envs:              [development]
+
 sass:
-  style: compressed
-
-# Plugins
-plugins:
-  - jekyll-paginate
-  - jekyll-paginate-content
-
-# Exclude my node related stuff
-exclude: [
-  'package.json',
-  'package-lock.json',
-  'src',
-  'node_modules',
-  'initpost.sh',
-  'Gemfile',
-  'Gemfile.lock',
-  'gulpfile.js',
-  'README.md'
-]
-
-# Theme
-version: v3.1.0
+  style:               compressed

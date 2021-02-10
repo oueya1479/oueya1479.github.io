@@ -1,8 +1,10 @@
-.idea
-.DS_Store
-.sass-cache
-Gemfile.lock
-package-json.lock
-_site
 node_modules
-_drafts
+vendor
+.bundle
+.sass-cache
+.jekyll-metadata
+.jekyll-cache
+*.gem
+
+#<removed/js>
+#<removed/css>
