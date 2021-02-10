@@ -1,6 +1,6 @@
 ---
 date: 2021-02-10 09:43:05
-layout: java
+layout: post
 title: Java interface
 subtitle: 'Java_예외 처리'
 description: 개발자가 사용자에게 전달할 수 있는 최고의 선물
