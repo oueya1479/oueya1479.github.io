@@ -1,8 +1,8 @@
-*.gem
-.bundle
-.ruby-version
-.jekyll-cache
+.idea
+.DS_Store
 .sass-cache
-_site
 Gemfile.lock
+package-json.lock
+_site
 node_modules
+_drafts
