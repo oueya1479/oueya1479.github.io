@@ -1,0 +1,19 @@
+.dl-table {
+  a {
+    @supports ((text-decoration-thickness: initial) and (text-underline-offset: initial)) {
+      text-underline-offset: .8rem;
+    }
+    @supports not ((text-decoration-thickness: initial) and (text-underline-offset: initial)) {
+      padding-bottom: .45rem;
+    }
+  }
+
+  .btn, .gumroad-button  {
+    margin: 1rem 0;
+  }
+}
+
+// .lead.aspect-ratio.sixteen-nine { 
+//   border: 1px solid var(--border-color);
+//   transition: border-color 500ms ease;
+// }
