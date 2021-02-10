@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
-@mixin mainFont($weight: 700) {
+@mixin mainFont($weight: 300) {
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: $weight;
     font-style: normal;
