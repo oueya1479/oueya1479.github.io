@@ -1,3 +1,20 @@
+---
+date: 2021-02-10 09:43:05
+layout: post
+title: Java interface
+subtitle: 'Java_예외 처리'
+description: 개발자가 사용자에게 전달할 수 있는 최고의 선물
+image: https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559821647/theme6_qeeojf.jpg
+optimized_image: https://res.cloudinary.com/dm7h7e8xj/image/upload/c_scale,w_380/v1559821647/theme6_qeeojf.jpg
+category: blog
+tags:
+  - programming
+  - java
+author: Dongheon, Kim
+paginate: true
+---
+
+<!--page-->
 # Exception
 
 Java에서 compile를 하다 보면 일반 오류가 나와 실행하지 못하는 경우가 있다.
@@ -6,7 +23,7 @@ Java에서 compile를 하다 보면 일반 오류가 나와 실행하지 못하�
 예외 처리란 **일반 예외**와 **실행 예외**가 있다.
 
 **일반 예외**란 자바 소스를 컴파일하는 과정에서 예외 처리 코드가 필요한지 검사하며,
-**실행 예외**란 컴파일하는 과정에서 예외 처리 코드를 검사하지 않는 예외를 의미한다.
+**실행 예외**란 컴파일하는 과정에서 예외 처리 코드를 검사하지 않는 예외를 의미한다. 
 
 
 ## try, catch
@@ -47,15 +64,15 @@ public class ExceptionExam {
 			int convertNo = Integer.parseInt(data);		
 			int result = 100 / convertNo;
 		}
-		catch(ArrayIndexOutOfBoundsException e) { }
+		catch(ArrayIndexOutOfBoundsException e) { } 
 		catch(NumberFormatException e) { }
 		catch(Exception e) { e.printStackTrace(); }
-
+		
 		System.out.println("---메인 끝---");
 	}
 }
 ```
-예외가 발생할 수 있는 구문은 try { ... } 으로 묶고, 어떤 오류가 발생할 것인지에 대해 catch 구문에서 나열하는 것이다.
+예외가 발생할 수 있는 구문은 try { ... } 으로 묶고, 어떤 오류가 발생할 것인지에 대해 catch 구문에서 나열하는 것이다. 
 1. `String data = args[0];`은 존재하지 않는 인덱스에 접근할 때에 첫 번째 catch 구문인 `ArrayIndexOutOfBoundsException`에서 걸러진다.
 2. `int convertNo = Integer.parseInt(data);`은 문자열이 숫자로 변환할 수 없는 상황일 때 두 번째 catch구문인 `NumberFormatException`에서 걸러진다.
 3. 위의 상황을 제외하고 또 다른 오류가 발생할 경우 모든 Exception의 최고 조상인 세 번째 catch 구문 `Exception`에서 걸러진다.
@@ -71,8 +88,8 @@ public class ExceptionExam {
 		int result = 100 / convertNo;
 	}
 	catch(Exception e) { e.printStackTrace(); }
-	catch(ArrayIndexOutOfBoundsException e) { }
-	catch(NumberFormatException e) { }
+	catch(ArrayIndexOutOfBoundsException e) { } 
+	catch(NumberFormatException e) { } 
 ```
 
 `Exception` 은 모든 예외 처리의 최고 조상이다. 결국 인덱스를 벗어나는 오류가 발생해도, 첫번째 catch인 Exception에 의해 걸러지게 된다. 즉, 구현할 예외 처리에 대해 가장 높은 곳에 위치하고 있는 클래스를 가장 아래의 catch 구문에 위치 시켜야 한다.
@@ -192,3 +209,4 @@ extends로 Exception을 상속한다. 모든 예외는 Exception을 조상으로
 **throw**는 어떤 상황에서 발생할 수 있는 오류를 '던지다'라는 의미를 포함하고 있다.
 
 결국 `throw new WrongPasswordException()`이라는 것은,  사용자가 정의한 Exception 클래스를 새로 공간을 할당하고, 그것을 던진다는 의미이다.
+
