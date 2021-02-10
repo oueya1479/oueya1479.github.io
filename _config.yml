@@ -1,7 +1,7 @@
 # Site Settings
-name: Jekflix
-title: Jekflix | A blog theme for Jekyll
-description: Jekflix is a template for Jekyll inspired by Netflix and made by
+name: Flutheon
+title: Flutheon
+description: Programming in my daily life
   Thiago Rossener.
 tags:
   - blog
@@ -19,13 +19,13 @@ menu:
     url: /contact
   - title: Feed
     url: /feed.xml
-email: youremail@test.com
-disqus_username: disqus_username
+email: oueya1479@naver.com
+disqus_username: Dongheon, Kim
 
 
 # Social Media Settings
 # Remove the item if you don't need it
-github_username: github_username
+github_username: oueya1479
 facebook_username: facebook_username
 twitter_username: twitter_username
 instagram_username: instagram_username
@@ -42,7 +42,7 @@ two_columns_layout: true
 
 # Advanced Settings
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site
+url: "https://oueya1479.github.io" # the base hostname & protocol for your site
 google_analytics: "UA-XXXXXXXX-X"
 language: "en"
 categories_folder: category
