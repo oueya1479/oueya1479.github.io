@@ -1,93 +1,82 @@
 # The primary author of this blog.
 # Must be the same as `author` in `_config.yml`.
-# Change `qwtel` to your shortname.
-qwtel:
-  name:              Florian Klampfer
-  email:             mail@qwtel.com
+# Change `author1` to your shortname.
+author1:
+  name:              <firstname> <lastname>
+  email:             <mail@domain.tld>
 
   # Used at the bottom of each page and at the top of the `about` layout
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
   about:             |
-    Hi, I'm Florian or [**@qwtel**](https://twitter.com/qwtel) and I'm the the developer of **Hydejack**,
-    the Jekyll theme you're currently looking at.
-
-    There are multiple versions of **Hydejack**.
-    The table below shows what's included in each version:
-
-    |                               | Free                | PRO                 |
-    |:------------------------------|:-------------------:|:-------------------:|
-    | [Features][fea]               | &#x2714;            | &#x2714;            |
-    | [PRO Features][pro]           |                     | &#x2714;            |
-    | __Price__                     | __Free__            | <span class="price"><del>$99</del> <strong class="new-price">$69</strong> <small>One-Time Payment</small></span> [^22] |
-    |===============================+=====================+=====================|
-    |                               | [__Download__][kit] | [__Buy PRO__][buy]{:.gumroad-button data-gumroad-single-product="true"} |
-    {:.stretch-table.dl-table}
-
-    [^22]: Price now permanently reduced by <strong class="discount">30%</strong>! Use the offer code <strong class="code">QR0TW8M</strong> to apply this discount later.
-          {:.ppi}
-          If you're upgrading from Hydejack 8, find your upgrade discount code in the latest zip download.
-
-    <script type="module">
-      document.querySelectorAll('.ppi').forEach(async el => {
-        if (!el.dataset.done) {
-          const { name, emoji, code, discount } = await window._ppiData;
-          if (!code) return;
-          el.querySelectorAll('.name').forEach(el => { el.innerText = name });
-          el.querySelectorAll('.emoji').forEach(el => { el.innerText = emoji; el.title = name });
-          el.querySelectorAll('.code').forEach(el => { el.innerText = code.toUpperCase() });
-          el.querySelectorAll('.discount').forEach(el => { el.innerText = `${discount * 100}%` });
-          el.dataset.done = '';
-        }
-      });
-
-      document.querySelectorAll('.price').forEach(async el => {
-        if (!el.dataset.done) {
-          const { name, emoji, code, discount } = await window._ppiData;
-          if (!code) return;
-          el.querySelectorAll('.name').forEach(el => { el.innerText = name });
-          el.querySelectorAll('.emoji').forEach(el => { el.innerText = emoji; el.title = name });
-          el.querySelectorAll('.code').forEach(el => { el.innerText = code.toUpperCase() });
-          el.querySelectorAll('.new-price').forEach(el => { el.innerText = `$${99 - discount * 100}` });
-          el.dataset.done = '';
-        }
-      });
-    </script>
-
-    [fea]: /#features
-    [pro]: /download/
-    [kit]: https://github.com/hydecorp/hydejack-starter-kit/archive/v9.1.1.zip
-    [nfy]: https://app.netlify.com/start/deploy?repository=https://github.com/hydecorp/hydejack-starter-kit
-    [dtn]: https://www.netlify.com/img/deploy/button.svg
-    [buy]: https://gum.co/nuOluY
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    
+    Open `_data/authors.yml` to edit this text.
 
   # This photo will be used in the about section
   picture:
-    path:            /assets/img/me.jpg
+    path:            https://placehold.it/128x128
     # srcset is optional, but can be used to provide higher res versions for retina displays
     srcset:
-      1x:            /assets/img/me.jpg
-      2x:            /assets/img/me@2x.jpg
+      1x:            https://placehold.it/128x128
+      2x:            https://placehold.it/256x256
 
   # Social media icons in sidebar
   # Comment/uncommet to show/hide
   # Rearrange to change the order in which they appear
   social:
-    twitter:         hydecorp
-    github:          https://github.com/hydecorp/hydejack
-    email:           mail@qwtel.com
-    download:        https://github.com/hydecorp/hydejack-starter-kit/archive/v9.1.1.zip
+    twitter:         <username>
+    github:          <username>
+    # email:           <mail@domain.tld>
+    # rss:             https://<url>/feed.xml
+    # facebook:        <username>
+    # google:          <number>
+    # vk:              <username>
+    # youtube:         <string_string_string>
+    # vimeo:           <username>
+    # vine:            <username>
+    # spotify:         <user>/<number>
+    # soundcloud:      <username>
+    # lastfm:          <username>
+    # instagram:       <username>
+    # flickr:          <string@string>
+    # 500px:           <username>
+    # dribbble:        <username>
+    # behance:         <username>
+    # deviantart:      <username>
+    # ello:            <username>
+    # twitch:          <username>
+    # steam:           <number>
+    # reddit:          <username>
+    # tumblr:          <username>
+    # pinterest:       <username>
+    # foursquare:      <number>
+    # yelp:            <string>
+    # stackoverflow:   <number/username>
+    # npm:             <username>
+    # hackernews:      <username>
+    # trello:          <firstnamelastname>
+    # linkedin:        <firstname-lastname-string>
+    # xing:            <firstname_lastname_counter>
+    # blogger:         <number>
+    # delicious:       <username>
+    # stumbleupon:     <username>
+    # paypal:          <username>
+    # download:        <url>
+    # keybase          <username>
 
-# Another author
-mdo:
-  name:              Mark Otto
+# Another author (optional)
+author2:
+  name:              <firtname> <lastname>
+  email:             <mail@domain.tld>
   about:             |
-    Mark Otto is the designer of the original [Hyde Jekyll theme](http://hyde.getpoole.com) and author of this blog post.
-    The post is included here as filler content and to showcase Hydejacks's multi-author feature.
-    This is NOT an endorsement of this product on his part.
-  picture:           https://pbs.twimg.com/profile_images/630796572691804161/kYW5TxUR.jpg
-  twitter:           mdo
-  github:            mdo
-  accent_color:     '#268bd2'
-  accent_image:
-    background:     '#202020'
-    overlay:        false
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+    Open `_data/authors.yml` to edit this text.
+
+  picture:           https://placehold.it/128x128
+  twitter:           <username>
+  github:            <username>

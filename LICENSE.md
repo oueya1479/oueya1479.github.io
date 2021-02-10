@@ -1,5 +1,6 @@
 ---
 layout: plain
+sitemap: false
 ---
 
 # LICENSE

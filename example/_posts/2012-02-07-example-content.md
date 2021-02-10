@@ -1,13 +1,9 @@
 ---
 layout: post
-title: Example content
+title: Example Content
 description: >
   Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
-author: mdo
 sitemap: false
-related_posts:
-  - hydejack/_posts/2018-06-01-example-content-iii.md
-  - hydejack/_posts/2017-11-23-example-content-ii.md
 hide_last_modified: true
 ---
 

@@ -4,6 +4,7 @@ title: Config
 description: >
   This chapter covers the many configuration options of Hydejack, allowing you to tailor it to your needs.
 hide_description: true
+sitemap: false
 ---
 
 Once Jekyll is running, you can start with basic configuration by adding various entries to `_config.yml`. 
@@ -343,7 +344,7 @@ author:
   social:
     email:    mail@qwtel.com
     rss:      {{ site.url }}{{ site.baseurl }}/feed.xml # make sure you provide an absolute URL
-    download: https://github.com/hydecorp/hydejack/archive/v9.1.1.zip
+    download: https://github.com/hydecorp/hydejack/archive/v9.1.0.zip
 ~~~
 
 
