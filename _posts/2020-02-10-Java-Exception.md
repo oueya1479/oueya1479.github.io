@@ -1,15 +1,11 @@
-
 ---
 date: 2021-02-10T09:43:05.000Z
-layout: JAVA
+layout: java
 title: Java interface
 subtitle: 'Java_예외 처리'
-description: >-
-  개발자가 사용자에게 전달할 수 있는 최고의 선물
-image: >-
-  https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559821647/theme6_qeeojf.jpg
-optimized_image: >-
-  https://res.cloudinary.com/dm7h7e8xj/image/upload/c_scale,w_380/v1559821647/theme6_qeeojf.jpg
+description: 개발자가 사용자에게 전달할 수 있는 최고의 선물
+image: https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559821647/theme6_qeeojf.jpg
+optimized_image: https://res.cloudinary.com/dm7h7e8xj/image/upload/c_scale,w_380/v1559821647/theme6_qeeojf.jpg
 category: blog
 tags:
   - programming
@@ -17,6 +13,7 @@ tags:
 author: Dongheon, Kim
 paginate: true
 ---
+
 # Exception
 
 Java에서 compile를 하다 보면 일반 오류가 나와 실행하지 못하는 경우가 있다.
