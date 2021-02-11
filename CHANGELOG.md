@@ -1,6 +1,5 @@
 ---
 layout: plain
-sitemap: false
 ---
 
 # CHANGELOG
@@ -8,6 +7,14 @@ sitemap: false
 
 * this list will be replaced by the toc
 {:toc .large-only}
+
+## v9.1.2
+Feb 11 2021
+{:.heading.post-date}
+
+* Fix [#258](https://github.com/hydecorp/hydejack/issues/258)
+* Fix [#259](https://github.com/hydecorp/hydejack/issues/259)
+
  
 ## v9.1.1
 Feb 9 2021
@@ -99,58 +106,6 @@ Version 9.1 provides minor design changes, new features, and closes multiple iss
 * Allow transparent project and post images
 * Removing/leaving out the `logo` key in the config file will now correctly remove the logo from the sidebar
 * [PRO] Fixed a bug that caused blog posts to be included the the search even when set to `sitemap: false` in the front matter.
-
-## v9.0.5
-Sept 8 2020
-{:.heading.post-date}
-
-* Added GitHub Pages Starter Kit to PRO version
-* Added chapter on how to deploy PRO on GitHub Pages
-* JavaScript source files now included in PRO zip again
-* Updated default config file
-* Changed default code font
-* Improved fallback image in dark mode
-
-## v9.0.4
-July 15 2020
-{:.heading.post-date}
-
-* Fixed image fade in animation for images with `srcset`
-* Slightly increased size of post and project cards
-* Added page margin to print layout
-* Fixed KaTeX when JavaScript is disabled 
-* Fixed a layout bug in the `resume` layout when changing the content width in variable
-* Fixed table of contents sticky breakpoint
-
-## v9.0.3
-July 9 2020
-{:.heading.post-date}
-
-* Updated print resume style  
-* Updated docs for GitHub Pages
-* Slightly decreased size of dark mode icon
-* Fixed a bug that caused a GitHub Pages build to fail with an empty configuration file
-* Changed default icon so that it less resembles slashdot.org\~\~ 
-
-## v9.0.2
-July 7 2020
-{:.heading.post-date}
-
-* Fixed a bug that prevented the search from updating when offline is enabled
-* Fixed a bug that caused search terms to get lost during initialization
-* Fixed a bug that prevented `site.legal` from getting stored for offline during service worker installation
-* Added support to for `no-cache` param to service worker.
-
-## v9.0.1
-July 6 2020
-{:.heading.post-date}
-
-* Changing app icons has been revamped. See [this section](./docs/config.md#adding-custom-favicons-and-app-icons) in the docs.
-* Changed default icons
-* Changed default sidebar background
-* Added `jekyll-compose` defaults to config file
-* Slightly adjusted dark mode colors
-* Fixed resume layout breakpoint
 
 ## v9.0.5
 Sept 8 2020

@@ -10,14 +10,16 @@ image:
     530w:  /assets/img/blog/example-content-iii@0,5x.jpg
     265w:  /assets/img/blog/example-content-iii@0,25x.jpg
 related_posts:
-  - example/_posts/2017-11-23-example-content-ii.md
-  - /example/2012-02-07-example-content/
-sitemap: false
+  - hydejack/_posts/2017-11-23-example-content-ii.md
+  - hyde/_posts/2012-02-07-example-content.md
 ---
 
 Hydejack offers a few additional features to markup your markdown.
 Don't worry, these are merely CSS classes added with kramdown's `{:...}` syntax,
 so that your content remains compatible with other Jekyll themes.
+
+* toc
+{:toc}
 
 ## Large Tables
 
@@ -78,10 +80,10 @@ You can add large text.
 {:.lead}
 
 ## Large images
-![Full-width image](https://placehold.it/800x100){:.lead data-width="800" data-height="100"}
+![Full-width image](https://placehold.it/800x100){:.lead width="800" height="100"}
 
 ## Captions to images
-![Full-width image](https://placehold.it/800x100){:.lead data-width="800" data-height="100"}
+![Full-width image](https://placehold.it/800x100){:.lead width="800" height="100"}
 A caption to an image.
 {:.figure}
 
