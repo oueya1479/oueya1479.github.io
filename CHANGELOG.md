@@ -1,311 +1,4 @@
----
-layout: plain
-sitemap: false
----
-
 # CHANGELOG
-{:.no_toc}
-
-* this list will be replaced by the toc
-{:toc .large-only}
-
-## v9.1.2
-Feb 11 2021
-{:.heading.post-date}
-
-* Fix [#258](https://github.com/hydecorp/hydejack/issues/258)
-* Fix [#259](https://github.com/hydecorp/hydejack/issues/259)
-
- 
-## v9.1.1
-Feb 9 2021
-{:.heading.post-date}
-
-* Added tooltips to post subtitles and last-modified-at lines.
-* Added tooltips to abberavations (`<abbr>` tags), e.g. IIAFE. See [Example Content](/blog/hyde/2012-02-07-example-content/#inline-html-elements){:.flip-title} on how to use them in markdown.
-* Added tooltips to social media icons (inside main column only)
-* Fixed KaTeX font rendering
-* [PRO] Setting `clap_button: false` will hide the clap button preview, even in development
-* [PRO] A overscrolling ToC will scroll itself to keep the active element in view.
-
-*[IIAFE]: Instantly Invoked Asynchronous Function Expression
-*[ToC]: Table of Contents
-
-## v9.1.0
-Feb 5 2021
-{:.heading.post-date}
-
-Version 9.1 provides minor design changes, new features, and closes multiple issues:
-
-### Added
-
-*   Code blocks now can have headers:
-
-    ~~~js
-    // file: 'hello-world.js'
-    console.log('Hello World!');
-    ~~~
-
-    To add the headers, simply make the first line a comment of the form `file: "dir/filename.ext"`.
-
-    * Code blocks now have a copy-to-clipboard button
-  
-*   Resumes can now have download buttons.
-
-    ![Breadcrumbs](assets/img/blog/9.1.0-3.png){:.border.lead}
-
-    Add the following to the front matter. Note that the PDF needs to be pre-generated. 
-    See [the docs](docs/basics.md#downloads) for more.
-
-    ```yml
-    # file: "resume.md"
-    buttons:
-      print: true
-      pdf: /assets/Resume.pdf
-      vcf: http://h2vx.com/vcf/<!--url-->
-      json: /assets/resume.json
-    ```
-
-* Added breadcrumbs above page title:
-
-  ![Breadcrumbs](assets/img/blog/9.1.0-2.png){:.border.lead}
-
-  Note that this requires a [directory-like URL pattern](https://qwtel.com/posts/software/urls-are-directories/) like `/blog/:categories/:year-:month-:day-:title/` (default for Hydejack).
-
-  Disable with `hydejack.no_breadcrumbs`.
-
-* Added "Last modified at" to post layout:
-
-  ![Last modified at](assets/img/blog/9.1.0-1.png){:.border.lead}
-
-  To enable this feature, the post needs to have a `last_modified_at` property with a valid date. You can either set it manually in the frontmatter (not recommended), or use the [`jekyll-last-modified-at` plugin](https://github.com/gjtorikian/jekyll-last-modified-at) to set it for you (Not available on GitHub Pages!). 
-
-  You can remove this element by setting `hide_last_modified` in the front matter. You can disable it for all posts by setting `hydejack.hide_last_modified` in the config file. Setting `hydejack.hide_dates` (PRO version only) will also remove it, together with all other time-related UI elements.
-
-  You can customize the hover text, icon, and date format in `_data/strings.yml` using the following keys: `last_modified_at` (hover text), `last_modified_at_icon` (icon name, default: `icon-history`) and `date_formats.last_modified_at` (date format, default: `%Y-%m-%d`).
-
-* Added option to "invert" / darken the font colors in the sidebar. This enables use of bright sidebar images. 
-  Set `invert_sidebar: true` in the font matter to enable. Use `defaults` in the config file to enable this for all pages.
-
-* Added a demo of [Clap Button](https://getclaps.app/) during development.
-
-* Added option to configure border radius
-* Added dingbat to `page` layout
-* Added `plain` layout that comes without a dingbat
-* Added `smaller` and `larger` CSS classes that set the font size to the respective values.
-* Added options to change the file paths to favicon and apple touch icon in the confog file. Use `favicon` and `apple_touch_icon` respectively.
-
-### Changed
-* Added border radius to many elements
-* Modernized table design
-* [PRO] Setting `hydejack.advertise: false` will now remove the banner from the HTML and the JavaScript console.
-* Changed the box shadow of cards (projects, posts) to reduce the amount of painting the browser has to do on when mouse hovering them.
-* The layout when using the theme without the `no_break_layout` setting is now
-
-
-### Fixes
-* Allow transparent project and post images
-* Removing/leaving out the `logo` key in the config file will now correctly remove the logo from the sidebar
-* [PRO] Fixed a bug that caused blog posts to be included the the search even when set to `sitemap: false` in the front matter.
-
-## v9.0.5
-Sept 8 2020
-{:.heading.post-date}
-
-* Added GitHub Pages Starter Kit to PRO version
-* Added chapter on how to deploy PRO on GitHub Pages
-* JavaScript source files now included in PRO zip again
-* Updated default config file
-* Changed default code font
-* Improved fallback image in dark mode
-
-## v9.0.4
-July 15 2020
-{:.heading.post-date}
-
-* Fixed image fade in animation for images with `srcset`
-* Slightly increased size of post and project cards
-* Added page margin to print layout
-* Fixed KaTeX when JavaScript is disabled 
-* Fixed a layout bug in the `resume` layout when changing the content width in variable
-* Fixed table of contents sticky breakpoint
-
-## v9.0.3
-July 9 2020
-{:.heading.post-date}
-
-* Updated print resume style  
-* Updated docs for GitHub Pages
-* Slightly decreased size of dark mode icon
-* Fixed a bug that caused a GitHub Pages build to fail with an empty configuration file
-* Changed default icon so that it less resembles slashdot.org\~\~ 
-
-## v9.0.2
-July 7 2020
-{:.heading.post-date}
-
-* Fixed a bug that prevented the search from updating when offline is enabled
-* Fixed a bug that caused search terms to get lost during initialization
-* Fixed a bug that prevented `site.legal` from getting stored for offline during service worker installation
-* Added support to for `no-cache` param to service worker.
-
-## v9.0.1
-July 6 2020
-{:.heading.post-date}
-
-* Changing app icons has been revamped. See [this section](./docs/config.md#adding-custom-favicons-and-app-icons) in the docs.
-* Changed default icons
-* Changed default sidebar background
-* Added `jekyll-compose` defaults to config file
-* Slightly adjusted dark mode colors
-* Fixed resume layout breakpoint
-
-## v9.0.5
-Sept 8 2020
-{:.heading.post-date}
-
-* Added GitHub Pages Starter Kit to PRO version
-* Added chapter on how to deploy PRO on GitHub Pages
-* JavaScript source files now included in PRO zip again
-* Updated default config file
-* Changed default code font
-* Improved fallback image in dark mode
-
-## v9.0.4
-July 15 2020
-{:.heading.post-date}
-
-* Fixed image fade in animation for images with `srcset`
-* Slightly increased size of post and project cards
-* Added page margin to print layout
-* Fixed KaTeX when JavaScript is disabled 
-* Fixed a layout bug in the `resume` layout when changing the content width in variable
-* Fixed table of contents sticky breakpoint
-
-## v9.0.3
-July 9 2020
-{:.heading.post-date}
-
-* Updated print resume style  
-* Updated docs for GitHub Pages
-* Slightly decreased size of dark mode icon
-* Fixed a bug that caused a GitHub Pages build to fail with an empty configuration file
-* Changed default icon so that it less resembles slashdot.org\~\~ 
-
-## v9.0.2
-July 7 2020
-{:.heading.post-date}
-
-* Fixed a bug that prevented the search from updating when offline is enabled
-* Fixed a bug that caused search terms to get lost during initialization
-* Fixed a bug that prevented `site.legal` from getting stored for offline during service worker installation
-* Added support to for `no-cache` param to service worker.
-
-## v9.0.1
-July 6 2020
-{:.heading.post-date}
-
-* Changing app icons has been revamped. See [this section](./docs/config.md#adding-custom-favicons-and-app-icons) in the docs.
-* Changed default icons
-* Changed default sidebar background
-* Added `jekyll-compose` defaults to config file
-* Slightly adjusted dark mode colors
-* Fixed resume layout breakpoint
-
-## v9.0.0
-July 3 2020
-{:.heading.post-date}
-
-### Major
-*   Added Built-In Search Functionality
-
-    Hydejack now has its own built-in search solution, that integrates well with the existing page style and the new navbar. 
-   
-    The solution is entirely browser-based which means it even works while offline and doesn't depend on an 3rd party. 
-    This works, because Hydejack is designed for personal sites that generally have less than 1000 pages. 
-    In my testing, Jekyll build times have been a problem long before search query times.
-   
-    The results of the search are surprisingly good, but have only been tested in English and (somewhat) German. 
-    For better language support, I might build an integration with Algolia at some point, which has the best results, 
-    but requires stable internet connection and an API key. 
-    I'd be interested to hear about problems with search in other languages to determine if this is necessary.
-
-*   Added Table of Contents that is prettier, sticky, and dynamic.
-
-    Adding a table of contents is part of kramdown and can be done in all versions of Hydejack. 
-    However, v9 adds a dynamic version that will stick to the 3rd column on large screens and highlight the current section. 
-   
-    Note that this will reduce the amount of space freed up by the `no_break_layout: false` setting (otherwise the ToC would overlap with code blocks, math blocks, etc).
-
-*   Added a scroll-linked navbar that disappears when scrolling down and re-appears when scrolling up.
-
-*   Math support has been revamped because the old solution stopped working with Jekyll 4. Hydejack now supports both KaTeX and MathJax. 
-
-    The MathJax implementation is more similar to the old solution. It comes with a client-side runtime (MathJax in this case)
-    and works on GitHub Pages. It is the more heavy-weight of the two and doesn't work without JavaScript enabled. 
-    Due to the size of the complete MathJax package, it only works partially with offline support enabled.
-
-    The KaTeX implementation has been changed to pre-render the KaTeX output during site building.
-    It _does not_ ship a client-side runtime, which is more lightweight and works _without_ JavaScript.
-    In my opinion, it is the more elegant solution, but it requires a JavaScript runtime on the machine that builds the site.
-    This means that this solution doesn't work on GitHub Pages.
-
-    You can switch between the two implementations by changing the `kramdown.math_engine` key to either `katex` or `mathjax` in your config file.
-    The KaTeX implementation also requires the `kramdown-math-katex` gem in your `Gemfile`.
-
-*   Drastically improved build times through the use of `jekyll-include-cache`. 
-    Most of the previous tips on [improving page build speed](hydejack/_posts/2019-02-18-improving-site-build-speed.md) should now be obsolete.
-
-*   Added `grid` layout in PRO version that mirrors the `projects` layout, but for posts. 
-    If you've set `image`s for your posts, it will give your blog a more modern look.
-
-### Minor
-* CSS variables are now configurable via `_data/variables.yml`. While there are other ways to change them, this has the broadest reach across HTML (`img[sizes]` attribute!), CSS and JS.
-* Many JS content features (such as `#` heading links) now work even when `hydejack.no_push_state` is enabled.
-* Linking to posts in the `home` and `post` layout now accept either paths or URLs. [Read more](docs/basics.md#adding-related-posts-to-a-post).
-* The star icons in the resume layout can now be disabled via `no_skill_icons` and `no_language_icons`.
-* Resume layout now supports the following keys: `born`, `citizenship`, and `maritalStatus`.
-* PRO only: Added `hide_dates` option to disable showing blog post dates.
-* The `blog` layout now works without pagination, simply showing all posts on a single page when the `jekyll-pagination` plugin is not found.
-* The `projects`, `resume`, and `grid` layout now make better use of large screens, by letting content expand to the right of the screen. Restore the previous , set `no_break_columns` in front matter.
-* Removed smooth scroll polyfill for Safari/Webkit as it has caused problems with sticky content.
-* Figure captions can now be added to code blocks, math blocks, and tables in addition to just images using the `.figcaption` CSS class.
-* The order of the comment section relative to the about and related posts sections can now be customized via the `hydejack.post_addons` and `hydejack.project_addons` keys. See the example `_config.yml` for more.
-* Clicking the image in the `blog` layout will now navigate to the blog post. In the PRO version it will do so with the classic "move image in place" animation.
-* Grouping projects by year can now be disabled. Use `no_groups: true` in the front matter. This also applies to the new `grid` layout and the old `list` layout.
-* hy-img has been removed and replaced with browser's native `loading=lazy` attribute
-* Now serving separate JavaScript files for old and new browsers, allowing it to take advantage of many new language features.
-* JavaScript files are now chunked, so that only what is needed is loaded on demand.
-* hy-drawer and hy-push-state have been rewritten in TypeScript and LitHTML, fixing many bugs in the process.
-* Updated to Jekyll 4.1
-* Hydejack now has a dedicated offline page that will be shown when the client is offline and tries to open a page that hasn't been cached. 
-  The content of the page can be customized by creating `offline.md` file in the root with `layout: offline`, similar to `404.md`.
-* The code font can now be customized in the config file via the `font_code` key.
-
-### Design
-* Many layouts (`projects`, `resume`, `home`) will now use more space on large screens (disable via `hydejack.no_third_column`)
-* Headings now appear "oversized" on larger screens and extend to the right end of the screen (disable via `hydejack.no_large_headings`)
-* The base font size is now smaller across screen sizes (can be configured in `_sass/_variables.scss`)
-* The content width is now larger across screen sizes (can be configured in `_sass/_variables.scss`)
-* The link style has been changed to make picking accent colors easier for dark mode. It's also possible to link images now without worrying about underlines.
-* The amount of whitespace has been reduced. Previously it had been increased but it felt too much.
-* Added a [`note` class](docs/writing.md#adding-notes) that succeeds the `message` for adding auxillary content. The `message` class still exists.
-* The navbar buttons made to look more like buttons
-* Dark mode colors have been toned down a bit
-* Improved dark mode text rendering on macOS
-* The permalink style has been changed to use "#" instead of an icon.
-* Definition list now have a double colon after the definition term.
-* Changed the style of footnote links on small screens to make them easier to click.
-
-### Fixes
-* Horizontal scrolling on a code block, math black, or table can no longer accidentally open the drawer.
-* The client-side scripts are now more robust to missing HTML elements. This should ease theme customization.
-* Setting `sitemap: false` will now also add a `noindex` meta tag to prevent accidental search engine indexation.
-* Fixed back button not showing when opening in standalone mode for the first time.
-* The menu icon is now hidden when the drawer is disabled.
-* Using `no_drawer: true` is now working properly on cover pages when `no_push_state: false` is set.
-* Reduced the amount of pixels cached by the `will-change` optimization and fixed the corresponding warning in Firefox.
-
 
 ## v8.5.2
 August 31 2019
@@ -377,9 +70,9 @@ This version adds new options to increase production build speed. Read [this pos
 Feb 1 2019
 {:.heading.post-date}
 
-* Added support for custom `related_posts` 
+* Added support for custom `related_posts`
 * Removed footer from print layout
-* Increased photo size in print resume 
+* Increased photo size in print resume
 * Improved `welcome` layout generation performance
 * Fixed a bug that prevented scrolling to headlines with non-ascii characters (Thanks [@ForelaxX](https://github.com/ForelaxX))
 
@@ -490,7 +183,7 @@ So far Hydejack has been a decent Jekyll theme, but with v8 it really starts sta
   To get the most out of this plugin, it is recommended to provide the width and height of the image, e.g.
 
   ~~~md
-  ![Some image](assets/img/some-img.png){:width="800" height="600"}
+  ![Some image](assets/img/some-img.png){:data-width="800" data-height="600"}
   ~~~
 
   This will cause hy-img to render a placeholder of 800 by 600 `px`, preventing the document height from changing after the image has finished loading.
@@ -526,6 +219,23 @@ Apr 2 2018
 * Updated JS dependencies
 * Updated hy-push-state and hy-drawer to latest versions
 
+## v7.5.2
+Jul 10 2018
+{:.heading.post-date}
+
+* Fixed an issue that caused the `list` layout to be empty after upgrading Jekyll
+* Updated dependencies
+
+## v7.5.1
+Apr 2 2018
+{:.heading.post-date}
+
+### Changed
+* Moved from browserify to webpack
+* Updated ruby dependencies
+* Updated JS dependencies
+* Updated hy-push-state and hy-drawer to latest versions
+
 ## v7.5.0
 Dec 18 2017
 {:.heading.post-date}
@@ -534,7 +244,7 @@ Dec 18 2017
 * Added secondary `legal` nav in footer:
 
   ```yml
-  # file: `_config.yml`
+  # file: _config.yml
   legal:
     - title: Cookies Policy
       href:  /cookies-policy/
@@ -545,7 +255,7 @@ Dec 18 2017
 * The "heading permalink" can now be configured via `strings.yml`:
 
   ```yml
-  # file: `_data/strings.yml`
+  # file: _data/strings.yml
   permalink:      Permalink
   permalink_icon: icon-link
   ```
@@ -553,7 +263,7 @@ Dec 18 2017
 * Sections on resume layout can now be rearranged, e.g.:
 
   ```yml
-  # file: `resume.md`
+  # file: resume.md
   left_column:
     - work
     - volunteer
@@ -617,7 +327,7 @@ Nov 25 2017
 * Added `cookies_banner` setting:
 
   ~~~yml
-  # file: `_config.yml`
+  # file: _config.yml
   hydejack:
     cookies_banner: true
   ~~~
@@ -627,7 +337,7 @@ Nov 25 2017
   with the `cookies_banner.text` and `cookies_banner.okay` keys:
 
   ~~~yml
-  # file: `_data/strings.yml`
+  # file: _data/strings.yml
   cookies_banner:
     text: This site uses cookies.
     okay: Okay
@@ -725,7 +435,7 @@ Oct 27 2017
 ### Content
 * Updated documentation
 
-### Removed
+## Removed
 * Removed outdated example script in `my-scripts.html`
 
 ## v7.0.0
