@@ -15,7 +15,7 @@ author1:
     * Road_ize : 지도라는 개념에 테마를 덧붙여 사람들끼리 만든 지도를 공유하는 앱
     * snchurch : 교회 주보를 각자의 핸드폰에서 볼 수 있도록 하는 앱
 
-    현재는 Java에 좀더 치중하여 프론트엔드를 배우고 있으며, JSP&Servlet과 Asp, Ajax기술 및 Spring Framework, ORM Framwork르 대용량 웹을 제작하는 것을 계획하고 있습니다. 또한 M.E.A.N 스택을 이용하여 gitblog가 아닌 제 서버를 직접 구축하고, 사람들의 데이터를 분석하는 Fluu-stack개발자를 희망하고 있습니다. 
+    현재는 Java에 좀더 치중하여 프론트엔드를 배우고 있으며, JSP&Servlet과 Asp, Ajax기술 및 Spring Framework, ORM Framework를 학습하여 대용량 웹을 제작하는 것을 계획하고 있습니다. 또한 M.E.A.N 스택을 이용하여 gitblog가 아닌 제 서버를 직접 구축하고, 사람들의 데이터를 분석하는 Fluu-stack개발자를 희망하고 있습니다. 
   
  # This photo will be used in the about section
   picture:
@@ -29,8 +29,7 @@ author1:
   # Comment/uncommet to show/hide
   # Rearrange to change the order in which they appear
   social:
-    twitter:         photocyte
-    github:          photocyte
+    github:          oueya1479
     # email:           mailto:<mail@domain.tld>
     # rss:             https://<url>/feed.xml
     # facebook:        <username>

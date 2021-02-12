@@ -13,6 +13,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
 $gray: #888;
 $gray-bg: rgba(0,0,0,.025);
 $gray-text: #666;
@@ -31,6 +33,7 @@ $font-weight: 400;
 $font-weight-bold: 700;
 $font-weight-heading: 400;
 
+$font-family: 'Nanum Gothic', sans-serif;
 $code-font-family: Menlo, Monaco, Consolas, monospace;
 
 // Breakpoints and content width. All units must be in rem!

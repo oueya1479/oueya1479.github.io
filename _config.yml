@@ -54,18 +54,14 @@ author:
 
 # Add links to the sidebar.
 menu:
+  - title:             About
+    url:               /about/
+  - title:             Posts
+    url:               /posts/
   - title:             Publications
     url:               /publications/
   - title:             Research
     url:               /research/
-  - title:             About
-    url:               /about/
-  - title:             Blog
-    url:               /posts/
-  - title:             Media & Press
-    url:               /media_and_press/
-  - title:             FireflyBase.org
-    url:               http://www.fireflybase.org
 
 # Add links to the footer.
 # Typically you'll want to link to your cookie- or privacy policy (if appliable), etc..
@@ -90,7 +86,7 @@ paginate_path:         /page-:num/
 # ========================================================================================
 
 # Sidebar image and theme color of the site.
-accent_image:          /assets/img/35701506_1935132846517938_8952421413646499840_n3.jpg
+accent_image:          /assets/img/background.jpg
 accent_color:          '#4fb1ba'
 
 # The string encoding which fonts to fetch from Google Fonts.
