@@ -4,8 +4,9 @@
 # IMPORTANT: Set the URL of your site.
 # Set to https://<username>.github.io when hosting on GitHub Pages
 # (unless you are using a custom domain).
-url:                   https://photocyte.github.io
-github_username:       photocyte
+
+url:                   https://oueya1479.github.io
+github_username:       oueya1479
 
 # IMPORTANT: Set The "base URL" of your site.
 # When your site sits in a subdirectory, set to /<name of directory>
@@ -20,7 +21,7 @@ baseurl:               ''
 lang:                  en
 
 # The title of your blog. Used in the sidebar and the browser tab.
-title:                 Timothy R. Fallon
+title:                 fffffff
 
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
@@ -31,6 +32,7 @@ description:           >
 # A shorter description for the sidebar.
 tagline:               >
   biologist, biochemist, genomics enthusiast, natural products disciple, postdoc @ SIO/UCSD
+
 # A Jekyll theme with JavaScript powers.
 # Open `_config.yml` to edit this text.
 
