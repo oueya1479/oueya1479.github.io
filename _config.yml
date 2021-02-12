@@ -21,7 +21,7 @@ baseurl:               ''
 lang:                  en
 
 # The title of your blog. Used in the sidebar and the browser tab.
-title:                 fffffff
+title:                 FLUTHEON
 
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
@@ -31,7 +31,7 @@ description:           >
 
 # A shorter description for the sidebar.
 tagline:               >
-  biologist, biochemist, genomics enthusiast, natural products disciple, postdoc @ SIO/UCSD
+  CODING하는 사람들이라면 한 번쯤 꼭 거쳐야 하는 나의 BLOG
 
 # A Jekyll theme with JavaScript powers.
 # Open `_config.yml` to edit this text.
@@ -42,12 +42,12 @@ keywords:              [biochemistry,natural products,bioinformatics]
 # A (square) logo for your site.
 # If provided, it will be shown at the top of the sidebar.
 # It also used by the `jekyll-seo-tag` plugin.
-logo:                  https://user-images.githubusercontent.com/68142821/107723292-2ca20d00-6d24-11eb-98c5-8a6b0b71223a.jpg
+logo:                  https://user-images.githubusercontent.com/68142821/107723463-7db20100-6d24-11eb-9719-90398a9c8dea.jpg
 
 # This should be the same author as first entry in `_data/authors.yml`.
 author:
-  name:                Timothy Fallon
-  email:               tfallon@ucsd.edu
+  name:                Dongheon, Kim
+  email:               oueya1479@naver.com
   # Used by `jekyll-seo-tag`:
   twitter:             photocyte
   picture:             /images/avatar.png
