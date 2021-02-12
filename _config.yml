@@ -46,7 +46,7 @@ logo:                  https://user-images.githubusercontent.com/68142821/107723
 
 # This should be the same author as first entry in `_data/authors.yml`.
 author:
-  name:                Dongheon, Kim
+  name:                Dongheon Kim
   email:               oueya1479@naver.com
   # Used by `jekyll-seo-tag`:
   twitter:             photocyte
@@ -298,7 +298,7 @@ plugins:
 
 # Used for Twitter cards
 twitter:
-   username:            photocyte
+   username:            Dongheon Kim
 
 # Used for Facebook open graph
 # facebook:
@@ -308,10 +308,10 @@ twitter:
 
 # Used on index and about sites
 social:
-   name:                Timothy Fallon
+   name:                Dongheon Kim
    links:
      - https://twitter.com/photocyte
-     - https://github.com/photocyte
+     - https://github.com/oueya1479
      - https://www.fireflybase.org
 
 
