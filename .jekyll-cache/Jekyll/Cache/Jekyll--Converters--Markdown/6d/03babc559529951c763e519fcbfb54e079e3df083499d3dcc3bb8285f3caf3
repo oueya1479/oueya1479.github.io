@@ -1,0 +1,145 @@
+I"�?<!--page-->
+<h1 id="set">Set</h1>
+<p>이전 post에서 List에 관한 내용을 알아보았다.
+List에서 알아본 ArrayList, Vector, LinkedList는 모두 하나의 공통점을 가지고 있었는데,
+<strong>저장 순서를 유지한다는 점</strong>이다.</p>
+
+<p>remove를 통해 중간 인덱스에 해당하는 객체를 지워도, 뒤에 있는 모든 객체는 앞으로 한 칸씩 앞당겨 졌고,
+중간에 삽입 과정을 거쳐도, 뒤로 한 칸씩 전체적으로 밀려났다.</p>
+<blockquote>
+  <p>물론 LinkedList는 밀려난다는 표현보다는 중간의 Link가 달라진다는 말이 더 어울릴 것 같다.</p>
+</blockquote>
+
+<p>다음은 Oracle의 docs에 있는 Java Platform SE 8 의 공식 문서이다.
+Set은 어떤 메소드를 가지고 있는지 한 번 확인해보자.
+<img src="https://user-images.githubusercontent.com/68142821/107900332-0d091f80-6f84-11eb-85ee-b2668d4e85ac.png" alt="20210215115023" />
+<em>출처 : <a href="https://docs.oracle.com/javase/8/docs/api/">Oracle docs</a></em></p>
+
+<p>Set의 개념을 조금 더 잘 이해해보기 위해 간단한 코드를 작성해보았다.
+SetExam은 HashSet을 상속하였고, 그 클래스 자체가 Set이 되어 사용해보는 것이다.</p>
+
+<p>실행하기 전 String[] args으로 인수를 넘긴 것은 다음과 같다
+=&gt; 1 2 3 4 5 <strong>3 4 5</strong> 6</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kn">import</span> <span class="nn">java.util.HashSet</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SetExam</span> <span class="kd">extends</span> <span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="o">{</span>
+		<span class="kd">public</span> <span class="nf">SetExam</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">//super(5);</span>
+			<span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+				<span class="kt">boolean</span> <span class="n">re</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span> <span class="o">+</span> <span class="s">"추가 결과 : "</span> <span class="o">+</span> <span class="n">re</span><span class="o">);</span>
+			<span class="o">}</span>
+			
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--등록결과--"</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> <span class="c1">//this는 this.toString()과 같은 의미이다.</span>
+		<span class="o">}</span>
+		<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">new</span> <span class="nf">SetExam</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="mi">1</span><span class="n">추가</span> <span class="n">결과</span> <span class="o">:</span> <span class="kc">true</span>
+	<span class="mi">2</span><span class="n">추가</span> <span class="n">결과</span> <span class="o">:</span> <span class="kc">true</span>
+	<span class="mi">3</span><span class="n">추가</span> <span class="n">결과</span> <span class="o">:</span> <span class="kc">true</span>
+	<span class="mi">4</span><span class="n">추가</span> <span class="n">결과</span> <span class="o">:</span> <span class="kc">true</span>
+	<span class="mi">5</span><span class="n">추가</span> <span class="n">결과</span> <span class="o">:</span> <span class="kc">true</span>
+	<span class="mi">3</span><span class="n">추가</span> <span class="n">결과</span> <span class="o">:</span> <span class="kc">false</span>
+	<span class="mi">4</span><span class="n">추가</span> <span class="n">결과</span> <span class="o">:</span> <span class="kc">false</span>
+	<span class="mi">5</span><span class="n">추가</span> <span class="n">결과</span> <span class="o">:</span> <span class="kc">false</span>
+	<span class="mi">6</span><span class="n">추가</span> <span class="n">결과</span> <span class="o">:</span> <span class="kc">true</span>
+	<span class="o">--</span><span class="n">등록결과</span><span class="o">--</span>
+	<span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>Set은 중복이 되지 않는다고 했다.
+그러면 다음과 같은 코드는 중복일 수 있을까?</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.HashSet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Set</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberSetExam</span> <span class="o">{</span>
+	<span class="c1">//Member라는 클래스가 하나 존재한다고 가정한다.</span>
+	<span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;();</span>
+	
+	<span class="kd">public</span> <span class="nf">MemberSetExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"김동헌"</span><span class="o">,</span> <span class="mi">24</span><span class="o">,</span> <span class="s">"서울"</span><span class="o">));</span>
+		<span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"김가람"</span><span class="o">,</span> <span class="mi">28</span><span class="o">,</span> <span class="s">"대구"</span><span class="o">));</span>
+		<span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"김동헌"</span><span class="o">,</span> <span class="mi">24</span><span class="o">,</span> <span class="s">"서울"</span><span class="o">));</span>
+		
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"저장된 객체 수 : "</span> <span class="o">+</span> <span class="n">set</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">MemberSetExam</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>답은 <strong>아니다</strong>이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">저장된</span> <span class="n">객체</span> <span class="n">수</span> <span class="o">:</span> <span class="mi">3</span>
+</code></pre></div></div>
+
+<p>이는 객체가 각각 가지고 있는 hashCode와 equals의 메소드 기능을 살펴보아야 하는데,
+Set에서 add()메소드를 통해 객체를 삽입할 때 해당 객체의 hashCode() 메소드가 실행이 되며,
+같은 hashCode를 가지고 있는 객체가 존재할 경우 equals() 메소드가 실행이 된다.</p>
+
+<p>이 구문이 포함이 된다고 했을 때 결과 창을 살펴보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"hashCode 실행"</span><span class="o">);</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="na">hashCode</span><span class="o">()</span> <span class="o">+</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"equals 실행"</span><span class="o">);</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">obj</span> <span class="k">instanceof</span> <span class="nc">Member</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">Member</span> <span class="n">mb</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Member</span><span class="o">)</span> <span class="n">obj</span><span class="o">;</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">mb</span><span class="o">.</span><span class="na">getName</span><span class="o">())</span> <span class="o">&amp;&amp;</span> <span class="n">age</span> <span class="o">==</span> <span class="n">mb</span><span class="o">.</span><span class="na">getAge</span><span class="o">())</span> <span class="o">{</span>
+				<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="c1">//결과창</span>
+	
+	<span class="n">hashCode</span> <span class="n">실행</span>
+	<span class="n">hashCode</span> <span class="n">실행</span>
+	<span class="n">hashCode</span> <span class="n">실행</span>
+	<span class="n">equals</span> <span class="n">실행</span>
+	<span class="n">저장된</span> <span class="n">객체</span> <span class="n">수</span> <span class="o">:</span> <span class="mi">2</span>
+</code></pre></div></div>
+<h2 id="iterator">Iterator</h2>
+
+<p>Set컬렉션은 객체를 검색하는 메소드가 존재하지 않기 때문에 전체 객체를 대상으로 한 번씩 반복해서 가져오는 반복자 <strong>Iterator</strong>를 제공한다.</p>
+
+<p>어떻게 사용하는지 바로 알아보도록 하자.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kn">import</span> <span class="nn">java.util.HashSet</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SetExam</span> <span class="kd">extends</span> <span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="o">{</span>
+		<span class="kd">public</span> <span class="nf">SetExam</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">//super(5);</span>
+			<span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+				<span class="kt">boolean</span> <span class="n">re</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span> <span class="o">+</span> <span class="s">"추가 결과 : "</span> <span class="o">+</span> <span class="n">re</span><span class="o">);</span>
+			<span class="o">}</span>
+			
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--등록결과--"</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+			
+			<span class="c1">// 추가된 부분</span>
+			<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">it</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="c1">//super인 이유는 부모인 HashSet을 따르고 있기 때문이다.</span>
+			<span class="k">while</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+				<span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="c1">// 추가된 부분</span>
+			
+		<span class="o">}</span>
+		<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">new</span> <span class="nf">SetExam</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+:ET

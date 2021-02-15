@@ -1,0 +1,135 @@
+I"�I<!--page-->
+<h1 id="map">Map</h1>
+<p>List와 Set은 하나의 <strong>공간</strong>에 하나의 <strong>값</strong>이 들어간 것이라고 인식할 수 있다.
+Map은 하나의 공간에 <strong>두 개의 값</strong>이 들어간 것이라고 생각하면 편하다.</p>
+
+<p>물론 정확히 말하자면, key값과 value값으로 구성된 객체를 저장하는 구조를 가지고 있다.</p>
+
+<p>지금껏 List&lt;<strong>E</strong>&gt;, Set&lt;<strong>E</strong>&gt; 이라고 표현해왔고, E는 <strong>the type of elements maintained by this set</strong>를 의미했다.</p>
+
+<p>Map에서는 Map&lt;<strong>K</strong>, <strong>V</strong>&gt;과 같은 방법으로 표기를 하는데
+K는 <strong>the type of keys maintained by this map</strong>,
+V는 <strong>the type of mapped values</strong>를 의미하는 것이다.</p>
+
+<p><del>그냥 Key, Value라고 외우면 편하다</del></p>
+
+<h2 id="hash-map">Hash Map</h2>
+<p>다음 예시를 보고 Map이 어떤 역할을 하는지 빠르게 이해해보자.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MapExam</span> <span class="kd">extends</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;{</span>
+	<span class="kd">public</span> <span class="nf">MapExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="s">"동원"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">30</span><span class="o">,</span> <span class="s">"동투"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="s">"동쓰리"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="s">"동포"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">40</span><span class="o">,</span> <span class="s">"동파이브"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">30</span><span class="o">,</span> <span class="s">"동식스"</span><span class="o">);</span>
+		
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"추가 후 : "</span> <span class="o">+</span> <span class="k">this</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">MapExam</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>HashMap을 상속받았기 때문에 super.put 메소드를 사용할 수 있으며,
+List에서 사용한 add와 비슷한 개념으로 생각하면 된다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="c1">//결과</span>
+	<span class="n">추가</span> <span class="n">후</span> <span class="o">:</span> <span class="o">{</span><span class="mi">20</span><span class="o">=</span><span class="n">동쓰리</span><span class="o">,</span> <span class="mi">40</span><span class="o">=</span><span class="n">동파이브</span><span class="o">,</span> <span class="mi">10</span><span class="o">=</span><span class="n">동포</span><span class="o">,</span> <span class="mi">30</span><span class="o">=</span><span class="n">동식스</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">put(10,  "동원");</code>  <code class="language-plaintext highlighter-rouge">put(30,  "동투");</code>가 먼저 실행되었음에도 ‘<strong>동쓰리</strong>‘가 먼저 출력되었다.
+이는 Set과 동일하게 <strong>값의 중복을 피하는</strong> 결과를 나타냈지만, 다른 시선으로 보면 <strong>중복 값을 삽입하게 되면 원래 있던 값은 사라지고, 새로운 값으로 저장</strong>이 되는 결과를 보여주었다.</p>
+
+<h2 id="treemap">TreeMap</h2>
+<p>HashMap과 TreeMap의 가장 큰 차이는 TreeMap은 <strong>정렬</strong>이 된다는 것이다!
+이참에 제거하는 방법까지 알아본다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MapExam</span> <span class="kd">extends</span> <span class="nc">TreeMap</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;{</span>
+	<span class="kd">public</span> <span class="nf">MapExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="s">"동원"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">30</span><span class="o">,</span> <span class="s">"동투"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="s">"동쓰리"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="s">"동포"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">40</span><span class="o">,</span> <span class="s">"동파이브"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">30</span><span class="o">,</span> <span class="s">"동식스"</span><span class="o">);</span>
+		
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"추가 후 : "</span> <span class="o">+</span> <span class="k">this</span><span class="o">);</span>
+		<span class="nc">String</span> <span class="n">value</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="mi">30</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"제거된 객체 : "</span> <span class="o">+</span> <span class="n">value</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"제거 후 : "</span> <span class="o">+</span> <span class="k">this</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">MapExam</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">추가</span> <span class="n">후</span> <span class="o">:</span> <span class="o">{</span><span class="mi">10</span><span class="o">=</span><span class="n">동포</span><span class="o">,</span> <span class="mi">20</span><span class="o">=</span><span class="n">동쓰리</span><span class="o">,</span> <span class="mi">30</span><span class="o">=</span><span class="n">동식스</span><span class="o">,</span> <span class="mi">40</span><span class="o">=</span><span class="n">동파이브</span><span class="o">}</span>
+<span class="n">제거된</span> <span class="n">객체</span> <span class="o">:</span> <span class="n">동식스</span>
+<span class="n">제거</span> <span class="n">후</span> <span class="o">:</span> <span class="o">{</span><span class="mi">10</span><span class="o">=</span><span class="n">동포</span><span class="o">,</span> <span class="mi">20</span><span class="o">=</span><span class="n">동쓰리</span><span class="o">,</span> <span class="mi">40</span><span class="o">=</span><span class="n">동파이브</span><span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="iterator">Iterator</h2>
+<p>Set에서 배웠던 방법으로 Iterator를 사용하여 하나씩 꺼내는 연습을 해본다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MapExam</span> <span class="kd">extends</span> <span class="nc">TreeMap</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;{</span>
+	<span class="kd">public</span> <span class="nf">MapExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="s">"동원"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">30</span><span class="o">,</span> <span class="s">"동투"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="s">"동쓰리"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="s">"동포"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">40</span><span class="o">,</span> <span class="s">"동파이브"</span><span class="o">);</span>
+		<span class="n">put</span><span class="o">(</span><span class="mi">30</span><span class="o">,</span> <span class="s">"동식스"</span><span class="o">);</span>
+		
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"추가 후 : "</span> <span class="o">+</span> <span class="k">this</span><span class="o">);</span>
+		<span class="nc">String</span> <span class="n">value</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="mi">30</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"제거된 객체 : "</span> <span class="o">+</span> <span class="n">value</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"제거 후 : "</span> <span class="o">+</span> <span class="k">this</span><span class="o">);</span>
+		
+		<span class="c1">//Iterator</span>
+		<span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">keySet</span><span class="o">();</span>
+		<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">it</span> <span class="o">=</span> <span class="n">set</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+		<span class="k">while</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+			<span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+			<span class="nc">String</span> <span class="n">v</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">k</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">k</span> <span class="o">+</span> <span class="s">" : "</span> <span class="o">+</span> <span class="n">v</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">MapExam</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Iterator구문은 개선된 for문으로 변환할 수 있다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">k</span> <span class="o">:</span> <span class="kd">super</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
+	<span class="nc">String</span> <span class="n">v</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">k</span> <span class="o">+</span> <span class="s">" : "</span> <span class="o">+</span> <span class="n">v</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>다음과 같은 방법도 있다.</p>
+
+<p>Set에 Map의 Key와 Value가 담긴 하나의 Entry를 entrySet() 메소드를 통해 담는 것이다.
+위의 Iterator방법과 동일하지만 Integer대신에 Map.Entry&lt;Integer, String&gt;을 통하여 담는 방법으로,
+조금 복잡해 보이기는 한다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="n">entrySet</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">entrySet</span><span class="o">();</span>
+<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="n">entryIt</span> <span class="o">=</span> <span class="n">entrySet</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+<span class="k">while</span><span class="o">(</span><span class="n">entryIt</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+	<span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">entry</span> <span class="o">=</span> <span class="n">entryIt</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+	<span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">();</span>
+	<span class="nc">String</span> <span class="n">v</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">k</span> <span class="o">+</span> <span class="s">" : "</span> <span class="o">+</span> <span class="n">v</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 방법에도 개선된 for 구문으로 조금 쉽게 가능하다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">:</span> <span class="kd">super</span><span class="o">.</span><span class="na">entrySet</span><span class="o">())</span> <span class="o">{</span>
+	<span class="nc">Integer</span> <span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getKey</span><span class="o">();</span>
+	<span class="nc">String</span> <span class="n">v</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
+	<span class="n">system</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">k</span> <span class="o">+</span> <span class="s">" : "</span> <span class="o">+</span> <span class="n">v</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+:ET
