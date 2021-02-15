@@ -1,0 +1,160 @@
+I"�?<!--page-->
+<h1 id="list">List</h1>
+
+<p>List 컬렉션은 객체를 일렬로 늘어놓은 구조이다.
+<strong>객체를 인덱스로 관리하며, 객체 자체를 저장하는 것이 아닌, 객체의 번지를 참조한다</strong></p>
+
+<p>ArrayList, Vector, LinkedList가 있으며, 각각 정의할 때에는
+<code class="language-plaintext highlighter-rouge">ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;(5);</code> 의 형태보다는
+<code class="language-plaintext highlighter-rouge">List&lt;String&gt; list = new ArrayList&lt;String&gt;(5);</code> 의 형태를 선호한다.</p>
+
+<p><strong>List</strong>란 각 구현 클래스의 틀을 정하는 <strong>interface</strong>로 정의되어 있으며
+사용자의 편의로 인해, 또는 어떤 기업의 요구에 맞게 ArrayList에서 속도가 좀더 빠른 LinkedList로 변환하기를 요구할 수 있다.</p>
+
+<p>즉, 새로운 상황이나 유지 보수 측면에서는 List로 선언하는 것이 다른 변화에 위험 부담이 적다는 뜻이다.</p>
+
+<h2 id="arraylist">ArrayList</h2>
+
+<p>일반 배열과 ArrayList는 인덱슬 객체를 관리한다는 점에서는 유사하지만,
+<strong>배열</strong>은 생성할 때 크기가 고정되고, 사용 중에 크기를 변경할 수 없지만,
+<strong>ArrayList</strong>는 저장 용량을 초과한 객체가 들어오면 자동적으로 용량이 늘어난다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArratList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+<span class="c1">//or</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;(</span><span class="mi">30</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>ArrayList의 초기 생성자 저장 용량은 10이다. 생성자가 오버로딩 되어 있어 int형으로 인수를 넘겨준다면, 그 값이 <strong>ArrayList의 저장 용량</strong>이 된다.</p>
+
+<p>이처럼 ArrayList class를 바로 사용해도 되지만, 나만의 리스트를 만들고 싶다면, ArrayList를 상속하는 class를 만들면 된다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">ArrayListExam</span> <span class="kd">extends</span> <span class="nc">ArrayList</span><span class="o">{</span>
+
+	<span class="nc">Object</span> <span class="n">obj</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="o">;</span>
+
+	<span class="c1">//위에서 설명했듯 ArrayList는 생성자로 int가 들어오면 저장 용량이 된다.</span>
+	<span class="kd">public</span> <span class="nf">ArrayListExam</span><span class="o">(){</span>
+			<span class="kd">super</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="o">.</span>
+	<span class="o">.</span>
+	<span class="o">.</span>
+</code></pre></div></div>
+
+<p>메소드를 다음과 같이 만들어 보았다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addInt</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Integer</span> <span class="n">it</span> <span class="o">=</span>  <span class="k">new</span> <span class="nc">Integer</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+		<span class="n">add</span><span class="o">(</span><span class="n">it</span><span class="o">);</span>
+	<span class="o">}</span>
+		
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addFloat</span><span class="o">(</span><span class="kt">float</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Float</span> <span class="n">ft</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Float</span><span class="o">(</span><span class="n">f</span><span class="o">);</span>
+		<span class="n">add</span><span class="o">(</span><span class="n">ft</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addString</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">add</span><span class="o">(</span><span class="n">st</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">printList</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="n">size</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"list에 들어있는 객체의 총 개수는 = "</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="n">i</span><span class="o">;</span> <span class="n">count</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">obj</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="n">count</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">obj</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>여기서 알아야 할 것은 add메소드는 모두 상속받고 있는 <strong>ArrayList</strong>에서 제공하고 있는 것이며,
+super.add( .. ) 와 같은 맥락이라고 보면 된다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Integer it =  new  Integer(i)</code>의 과정이 필요한 이유는 ArrayList에는 객체만 담을 수 있기 때문에, i를 포장 객체로 만들어야만 한다. 그것을 위해 박싱(Boxing)의 과정을 거친 것이다.</p>
+
+<p>그러나 Java는 오토박싱을 지원한다. 즉, <code class="language-plaintext highlighter-rouge">Integer int = new Integer();</code> 과정을 거치지 않아도, 인수로 받은 i 가 <strong>자동으로 Integer Boxing</strong>이 되어 저장된다는 것이다.</p>
+
+<blockquote>
+  <p>Integer it =  new <del>Integer</del>(i) 와 같은 모습이 보인다면,
+<code class="language-plaintext highlighter-rouge">Integer it =  Integer.valueOf(i)</code> 으로 교체해주길 바란다.
+이는 version 9 이후에 새로운 문법에서 추천하지 않는 구문이기 때문이다.</p>
+</blockquote>
+
+<h2 id="vector">Vector</h2>
+<p>Vector는 ArrayList와 동일한 구조를 취하고 있기 때문에 어렵지 않다. 또한 생성하는 방법도 같기 때문에 상위 인터페이스인 List를 객체에 취함으로써 생성하는 것이 효율적이다.
+<code class="language-plaintext highlighter-rouge">List&lt;E&gt; list = new Vector&lt;E&gt;();</code></p>
+
+<p>Vector는 ArrayList와 차이점은 <strong>동기화된 메소드로 구성</strong>되어 있는가, 아닌가 이다. Vector는 동기화된 메소드로 구성되어 있기 때문에 하나의 스레드가 실행을 완료해야만 다른 스레드를 실행할 수 있다.</p>
+
+<p>간단히 정리하자면, ArrayList는 동기화가 되어있지 않아 속도 면에서 우월하지만, Vector는 속도가 조금 느린 대신에 스레드가 안전하다고 볼 수 있는 것이다.</p>
+
+<p>ArrayList와 Vector는 각각 포함하고 있는 <strong>상속과 인터페이스</strong>가 같기 때문에,
+큰 차이 없이 메소드를 이용하면 된다.</p>
+<h3 id="arraylist-1">ArrayList</h3>
+<p><img src="https://user-images.githubusercontent.com/68142821/107896593-0ecde580-6f7a-11eb-9496-bee75981d6d4.png" alt="20210215103838" /></p>
+
+<h3 id="vector-1">Vector</h3>
+<p><img src="https://user-images.githubusercontent.com/68142821/107896595-0f667c00-6f7a-11eb-956f-dd9aa459a60a.png" alt="20210215103851" /></p>
+
+<h2 id="linkedlist">LinkedList</h2>
+<p>ArrayList와 Vector 모두 같은 인터페이스를 상속 받았기에 사용하는 방법이 매우 유사하였다.
+하지만 그 둘이 내부 배열에 객체를 저장하여 인덱스로 관리하였다고 하면
+LinkedList는 <strong>인접 참조를 링크</strong>하는 방식이다.</p>
+
+<blockquote>
+  <p>다음 사진을 보면 Deque라는 인터페이스가 추가로 있는 것이 보인다.
+<img src="https://user-images.githubusercontent.com/68142821/107897263-fe1e6f00-6f7b-11eb-896b-aeea0f20d89d.png" alt="20210215105310" /></p>
+</blockquote>
+
+<p>ArrayList와 Vector에서는 하나의 인덱스를 제거하면, 그 뒤에 있는 모든 요소들이 한 칸씩 앞으로 자리하게되는 구조였다.</p>
+
+<p>즉, 객체를 빈번하게 제거하고, 추가하는 작업에서의 ArrayList는 <strong>속도가 느려질 수</strong> 밖에 없다.</p>
+
+<p>그러나 LinkedList는 수정이 일어나는 곳 <strong>앞, 뒤</strong>에서 link하는 객체를 바꾸기만 하면 되기 때문에 객체의 삽입, 수정, 삭제의 요청에 효율적으로 응할 수 있다.
+<img src="https://user-images.githubusercontent.com/68142821/107897840-8cdfbb80-6f7d-11eb-863f-1005bc779467.jpg" width="60%" /></p>
+
+<p>다음은 ArrayList와 LinkedList의 속도 차이를 보자.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedListExample</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+	
+		<span class="kt">long</span> <span class="n">startTime</span><span class="o">;</span>
+		<span class="kt">long</span> <span class="n">endTime</span><span class="o">;</span>
+		
+		<span class="c1">//임의의 고정된 구간에서 nano seconds의 값을 반환합니다.</span>
+		<span class="c1">//자바 버전 **1.5 이상**</span>
+		<span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span> <span class="c1">//0번지에 지속적으로 추가하여 객체가 뒤로 밀려나게 합니다.</span>
+			<span class="n">list1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+		<span class="o">}</span>
+		
+		<span class="c1">//nano seconds 끝</span>
+		<span class="n">endTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ArrayList 걸린시간: "</span> <span class="o">+</span> <span class="o">(</span><span class="n">endTime</span><span class="o">-</span><span class="n">startTime</span><span class="o">)</span> <span class="o">+</span> <span class="s">" ns"</span><span class="o">);</span>
+		
+		<span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">list2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+		<span class="o">}</span>
+		<span class="n">endTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"LinkedList 걸린시간: "</span> <span class="o">+</span> <span class="o">(</span><span class="n">endTime</span><span class="o">-</span><span class="n">startTime</span><span class="o">)</span> <span class="o">+</span> <span class="s">" ns"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>다음은 결과이다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ArrayList</span> <span class="nl">걸린시간:</span> <span class="mi">12056400</span> <span class="n">ns</span>
+<span class="nc">LinkedList</span> <span class="nl">걸린시간:</span> <span class="mi">4505500</span> <span class="n">ns</span>
+</code></pre></div></div>
+
+<p>고정 값은 아니지만, 이 실험으로 객체의 삽입에는 LinkedList가 속도가 빠르다는 것을 알 수 있다.
+지금은 0번지에 계속 객체를 삽입하여 ArrayList측에서는 객체가 계속 뒤로 밀려나게 했지만,
+순차적으로 추가하거나 삭제하는 부분에서는 LinkedList보다 ArrayList가 더 빠를 것이다.</p>
+
+<p><strong>중요한 점은 어떤 상황에서 어느 컬렉션이 더 나을 것인가를 생각해보고, 구현하는 것이 올바른 선택이라는 것이다.</strong></p>
+:ET

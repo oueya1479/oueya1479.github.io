@@ -3,7 +3,7 @@ date: 2021-02-10 09:43:05
 layout: post
 title: Java Exception
 description: 개발자가 만든 코드가 사용자에게 전달될 때 가장 값지게 줄 수 있는 방법을 알아보도록 한다.
-image: https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559821647/theme6_qeeojf.jpg
+image: https://user-images.githubusercontent.com/68142821/107894405-eee6f380-6f72-11eb-9e60-8935d929de70.png
 tags:
   - programming
   - java
