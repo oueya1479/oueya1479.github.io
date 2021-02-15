@@ -1,0 +1,6 @@
+I"�<!--page-->
+<h1 id="main">Main</h1>
+<p>MVC구조는 Main을 담당하고 있는 StartView와
+Controller를 담당하고 있는 MapStudentController,
+Service를 담당하고 있는 MapStudentService 파일이 있으며</p>
+:ET
