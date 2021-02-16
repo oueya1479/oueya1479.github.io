@@ -1,0 +1,106 @@
+I"�5<!--page-->
+
+<h1 id="mvc-구조-실습">MVC 구조 실습</h1>
+
+<p>MVC구조 중 오늘 실습에 해당하는 부분은 Controller이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/68142821/108051836-b2a8b580-708e-11eb-95f1-c753abeff4ee.png" alt="boardClassDiagram" /></p>
+
+<h2 id="controller">Controller</h2>
+<p>우리는 사용자에게 선택권을 주기도, 사용자로부터 입력을 받아 그 기능을 수행하는 부분도 모두 Model과 View로 이루었다.</p>
+
+<p>사용자의 요청이 들어오기 시작할 때부터 그 기능을 수행하기 전까지 <strong>한 구역</strong>을 거쳐야만, 이를 테면 통로 같은 부분이 있어야 정상적으로 수행할 것이다. 나는 Controller을 컴퓨터의 CPU라고 생각한다. 모든 명령의 중앙 처리 장치이며, Brain에 해당하는 역할이기 때문이다.</p>
+
+<p><strong>Controller</strong>는 사용자의 요청으로 그 기능을 수행해야 하는 메소드를 가리키는 역할을 한다.
+이렇게 말하면 정말 작은 역할을 담당하는 것처럼 보이기도 하겠다.</p>
+
+<p>하지만 Model로부터 나오는 모든 예외 처리나 새로운 View를 제공하는 임무, 기능이 성공인지 실패인지 가늠하는 가장 중요한 역할이기도 하다. 위 이미지에서는 하나의 노란색 박스에 불과하지만, <strong>사용자와 개발자를 이어주는 징검다리</strong>같은 역할의 Controller는 program에 있어 매우 중요한 역할을 한다.</p>
+
+<h3 id="broadcontrollerjava">BroadController.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">kosta.exam.dto.Board</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">kosta.exam.exception.DuplicateException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">kosta.exam.exception.InexistentException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">kosta.exam.service.BoardService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">kosta.exam.service.BoardServiceImpl</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">kosta.exam.view.FailView</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">kosta.exam.view.SuccessView</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BoardController</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">BoardService</span> <span class="n">boardService</span> <span class="o">=</span> <span class="nc">BoardServiceImpl</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="nf">BoardController</span><span class="o">()</span> <span class="o">{}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">getAllBoard</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Board</span><span class="o">&gt;&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="n">boardService</span><span class="o">.</span><span class="na">getBoardList</span><span class="o">();</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">map</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="k">throw</span> <span class="k">new</span> <span class="nf">InexistentException</span><span class="o">();</span>
+			<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+				<span class="nc">SuccessView</span><span class="o">.</span><span class="na">printBoard</span><span class="o">(</span><span class="n">map</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InexistentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">FailView</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="s">"게시물이 존재하지 않습니다."</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">getBoardByKind</span><span class="o">(</span><span class="nc">String</span> <span class="n">kind</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Board</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="n">boardService</span><span class="o">.</span><span class="na">getBoardByKind</span><span class="o">(</span><span class="n">kind</span><span class="o">);</span>
+			<span class="nc">SuccessView</span><span class="o">.</span><span class="na">printBoardByKind</span><span class="o">(</span><span class="n">kind</span><span class="o">,</span> <span class="n">map</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">InexistentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">FailView</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="s">"존재하지 않는 유형입니다."</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">getBoardByNo</span><span class="o">(</span><span class="nc">String</span> <span class="n">kind</span><span class="o">,</span> <span class="kt">int</span> <span class="n">no</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">Board</span> <span class="n">board</span> <span class="o">=</span> <span class="n">boardService</span><span class="o">.</span><span class="na">getBoardByNo</span><span class="o">(</span><span class="n">kind</span><span class="o">,</span> <span class="n">no</span><span class="o">);</span>
+			<span class="nc">SuccessView</span><span class="o">.</span><span class="na">printBoardByNo</span><span class="o">(</span><span class="n">board</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">InexistentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">kind</span><span class="o">))</span>
+				<span class="nc">FailView</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="s">"존재하지 않는 유형입니다."</span><span class="o">);</span>
+			<span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">no</span><span class="o">)))</span> <span class="o">{</span>
+				<span class="nc">FailView</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="s">"존재하지 않는 글 번호입니다."</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">insertBoard</span><span class="o">(</span><span class="nc">String</span> <span class="n">kind</span><span class="o">,</span> <span class="nc">Board</span> <span class="n">board</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">boardService</span><span class="o">.</span><span class="na">insertBoard</span><span class="o">(</span><span class="n">kind</span><span class="o">,</span> <span class="n">board</span><span class="o">))</span> <span class="o">{</span>
+				<span class="nc">SuccessView</span><span class="o">.</span><span class="na">printMessage</span><span class="o">(</span><span class="s">"성공적으로 등록되었습니다."</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">DuplicateException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">FailView</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="s">"이미 존재하는 글 번호입니다."</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InexistentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">FailView</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="s">"존재하지 않는 유형입니다."</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">deleteBoard</span><span class="o">(</span><span class="nc">String</span> <span class="n">kind</span><span class="o">,</span> <span class="kt">int</span> <span class="n">no</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">boardService</span><span class="o">.</span><span class="na">deleteBoard</span><span class="o">(</span><span class="n">kind</span><span class="o">,</span> <span class="n">no</span><span class="o">))</span> <span class="o">{</span>
+				<span class="nc">SuccessView</span><span class="o">.</span><span class="na">printMessage</span><span class="o">(</span><span class="s">"성공적으로 삭제되었습니다."</span><span class="o">);</span>
+			<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+				<span class="nc">FailView</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="s">"존재하지 않는 글 번호입니다."</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InexistentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">FailView</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="s">"존재하지 않는 유형입니다."</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">updateBoard</span><span class="o">(</span><span class="nc">Board</span> <span class="n">board</span><span class="o">,</span> <span class="nc">String</span> <span class="n">kind</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">boardService</span><span class="o">.</span><span class="na">updateBoard</span><span class="o">(</span><span class="n">board</span><span class="o">,</span> <span class="n">kind</span><span class="o">))</span> <span class="o">{</span>
+				<span class="nc">SuccessView</span><span class="o">.</span><span class="na">printMessage</span><span class="o">(</span><span class="s">"성공적으로 수정되었습니다."</span><span class="o">);</span>
+			<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+				<span class="nc">FailView</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="s">"존재하지 않는 글 번호입니다."</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InexistentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">FailView</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">(</span><span class="s">"존재하지 않는 유형입니다."</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+:ET

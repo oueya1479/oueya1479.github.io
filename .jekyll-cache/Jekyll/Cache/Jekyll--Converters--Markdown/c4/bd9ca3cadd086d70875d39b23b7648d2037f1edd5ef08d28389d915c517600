@@ -1,2 +1,0 @@
-I"<p>Following Matt Might’s <a href="http://matt.might.net/articles/how-to-blog-as-an-academic/">“Reply to public” blogging tip</a>, here is a step-by-step tutorial (with pictures!) for converting low-resolution (e.g. ion trap, quadrupole) LC/MS data into the .mzML.gz (<a href="https://en.wikipedia.org/wiki/Gzip">gzipped</a>, <a href="https://en.wikipedia.org/wiki/Mass_spectrometry_data_format#mzML">mzML</a>) file format, followed by data analysis &amp; figure generation using the MZmine2 LC/MS data analysis software.</p>
-:ET
