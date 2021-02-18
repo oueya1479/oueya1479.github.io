@@ -1,0 +1,8 @@
+I"�<!--page-->
+<h1 id="gui">GUI</h1>
+<blockquote>
+  <p>다음 import 구문을 추가해야 한다.
+import java.awt*
+import javax.swing.*;</p>
+</blockquote>
+:ET

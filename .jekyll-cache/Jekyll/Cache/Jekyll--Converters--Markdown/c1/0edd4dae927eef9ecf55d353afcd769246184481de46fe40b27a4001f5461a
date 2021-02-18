@@ -1,0 +1,235 @@
+I"4c<!--page-->
+<h1 id="gui">GUI</h1>
+<blockquote>
+  <p>다음 import 구문을 추가해야 한다.
+import java.awt*
+import javax.swing.*;</p>
+</blockquote>
+
+<p>먼저 awt을 사용하여 화면 구성을 하면 운영체제에 따라 조금씩 다르다.
+Frame, Button, TextField와 같은 키워드를 사용한다.</p>
+
+<p>swing은 awt를 기본적으로 상속받고 있고, 자체적인 look and feel을 가지고 있어서 자체적으로 가지고 있는 그래픽을 사용한다. 따라서 모든 운영체제에서 동일한 그래픽을 보여준다.
+JFrame, JButton, JTextField와 같은 키워드를 사용한다.</p>
+
+<p>따라서 <strong>swing</strong>의 사용을 좀 더 권고한다.</p>
+
+<h3 id="용어-정리">용어 정리</h3>
+<p><strong>Container</strong> : 창문의 역할을 한다. 다양한 Component 들이 Container위에 올려져서 화면 구성을 한다. 반드시 하나 이상의 Contaier가 있어야 화면 구성을 할 수 있다.</p>
+<blockquote>
+  <p>ex) JFrame, JPanel, JDialog 등..</p>
+</blockquote>
+
+<p><strong>Component</strong> : 화면 구성을 담당하는 요소들. Component들은 반드시 Container위에 올려져야 화면에 보여질 수 있다.</p>
+<blockquote>
+  <p>ex) JTextField, JTextArea, JButton, JComboBox, JChechBox 등..</p>
+</blockquote>
+
+<p><strong>LayoutManager</strong> : Container위에 Component들이 올려질 때 위치를 설정하는 방법이다.</p>
+<blockquote>
+  <p>ex) BorderLayout, FlowLayout, GridLayout, CardLayout, GridBagLayout</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JFrameExam</span> <span class="kd">extends</span> <span class="nc">JFrame</span><span class="o">{</span>
+	<span class="nc">JButton</span> <span class="n">btn1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JButton</span><span class="o">(</span><span class="s">"클릭1"</span><span class="o">);</span>
+	<span class="nc">JButton</span> <span class="n">btn2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JButton</span><span class="o">(</span><span class="s">"클릭2"</span><span class="o">);</span>
+	<span class="nc">JTextField</span> <span class="n">text</span><span class="o">=</span> <span class="k">new</span> <span class="nc">JTextField</span><span class="o">(</span><span class="s">"재미있네요"</span><span class="o">,</span> <span class="mi">30</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="nf">JFrameExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="s">"JFrame 입니다."</span><span class="o">);</span> <span class="c1">//Title</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setSize</span><span class="o">(</span><span class="mi">300</span><span class="o">,</span> <span class="mi">300</span><span class="o">);</span> <span class="c1">//윈도우 창 사이즈 조정</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setLocationRelativeTo</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">//화면이 출력되는 위치를 가운데로 조정</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setDefaultCloseOperation</span><span class="o">(</span><span class="nc">JFrame</span><span class="o">.</span><span class="na">EXIT_ON_CLOSE</span><span class="o">);</span> <span class="c1">//X를 누르면 프로그램도 같이 종료</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">//창이 사용자에게 보여질 수 있도록 지정</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="nc">FlowLayout</span><span class="o">());</span> <span class="c1">//layout을 Flow로 지정</span>
+		
+		<span class="nc">Container</span> <span class="n">con</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">getContentPane</span><span class="o">();</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">btn1</span><span class="o">);</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">btn2</span><span class="o">);</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">JFrameExam</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="event처리하기">EVENT처리하기</h2>
+
+<p>사용자의 어떤 행동이 일어났을 때 -&gt; 기능을 한다. -&gt; 이벤트핸들러
+처리 순서 :</p>
+<ol>
+  <li>어떤 Component에서 이벤트가 발생하는지 주체를 찾는다.</li>
+  <li>1번에서 찾은 Component가 발생하는 이벤트종류를 찾는다.</li>
+  <li>XxxEvent에 해당하는 이벤트 핸들러를 구현한다.
+    <blockquote>
+      <p>XxxListener-interface 또는 XxxAdater-class를 사용한다.
+XxxAdapter 클래스는 XxxListener룰 미리 implements해 놓은 구현 abstract 클래스이다.
+XxxAdapter 클래스를 사용하면 필요한 메소드만 재 정의해서 사용할 수 있다.</p>
+    </blockquote>
+  </li>
+  <li>이벤트 등록을 한다.
+    <blockquote>
+      <p>이벤트 주체.addXxxListener(이벤트를 처리한 객체);
+<strong>이벤트를 처리한 객체</strong>는</p>
+      <ul>
+        <li>this</li>
+        <li>new 클래스 이름()</li>
+        <li>Anonymous 클래스 - 익명클래스 형태가 올 수 있다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//interface를 상속 받아야 함!</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JFrameExam</span> <span class="kd">extends</span> <span class="nc">JFrame</span> <span class="kd">implements</span> <span class="nc">ActionListener</span><span class="o">{</span>
+	<span class="nc">JButton</span> <span class="n">btn1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JButton</span><span class="o">(</span><span class="s">"클릭1"</span><span class="o">);</span>
+	<span class="nc">JButton</span> <span class="n">btn2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JButton</span><span class="o">(</span><span class="s">"클릭2"</span><span class="o">);</span>
+	<span class="nc">JTextField</span> <span class="n">text</span><span class="o">=</span> <span class="k">new</span> <span class="nc">JTextField</span><span class="o">(</span><span class="s">"재미있네요"</span><span class="o">,</span> <span class="mi">30</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="nf">JFrameExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="s">"JFrame 입니다."</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setSize</span><span class="o">(</span><span class="mi">300</span><span class="o">,</span> <span class="mi">300</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setLocationRelativeTo</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setDefaultCloseOperation</span><span class="o">(</span><span class="nc">JFrame</span><span class="o">.</span><span class="na">EXIT_ON_CLOSE</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="nc">FlowLayout</span><span class="o">());</span>
+		
+		<span class="nc">Container</span> <span class="n">con</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">getContentPane</span><span class="o">();</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">btn1</span><span class="o">);</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">btn2</span><span class="o">);</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+		<span class="n">btn1</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> <span class="c1">// 자기 자신을 넘김</span>
+		<span class="n">btn2</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="nc">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//addActionListener으로 넘어온 이벤트를 받음</span>
+		<span class="nc">Object</span> <span class="n">objEvent</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getSource</span><span class="o">();</span> <span class="c1">//받았을 때 무엇으로부터 받았는지 체크, e.getSource()는 Object형을 반환한다.</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">objEvent</span> <span class="o">==</span> <span class="n">btn1</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">text</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"내용 변화"</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">JFrameExam</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="adapter">Adapter</h2>
+<p>만약 x와 y좌표를 출력하고 싶어서 implements으로 mouse에 관련된 정보들을 찾아보면
+MouseListener라는 interface가 나온다.</p>
+
+<p>그러나 그 interface를 implements를 하면 다음과 같은 에러메시지가 나온다.
+<img src="https://user-images.githubusercontent.com/68142821/108168065-08866780-713a-11eb-9a0b-83fafb8caef9.png" alt="errorMessage" /></p>
+
+<p>이는 interface 안에 있는 메소드를 재 정의하라는 의미인데, 우리는 저 많은 메소드를 <strong>사용할 필요가 없다.</strong> 즉, 우리는 사용할 메소드만을 뽑아내는 작업이 필요로 한데, 그때 필요한 것이 <strong>Adapter</strong>이다.</p>
+
+<p>Adapter는 해당 interface와 관련된 모든 메소드를 이미 재 정의를 해둔 상태여서 그 클래스만 상속을 받게 되면 <strong>모든 메소드를 재 정의할 필요가 없어진다.</strong></p>
+
+<p>Adapter는 abstract클래스로 생성되어 있으며 상속을 받아야 하는데, 우리는 이전에 JFrame이라고 하는 녀석을 상속받았다. 그렇기 때문에 또 다른 클래스를 생성해야 한다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MEventExam</span> <span class="kd">extends</span> <span class="nc">MouseAdapter</span> <span class="o">{</span>
+	<span class="nc">JTextField</span> <span class="n">jTextField</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="nf">MEventExam</span><span class="o">(</span><span class="nc">JTextField</span> <span class="n">jTextField</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//이전에 만든 TextField의 값을 바꾸기 위해 생성자로 받아왔다.</span>
+											   <span class="c1">//같은 클래스가 아니기 때문에 값을 넘겨주어야만 한다.</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">jTextField</span> <span class="o">=</span> <span class="n">jTextField</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">mouseClicked</span><span class="o">(</span><span class="nc">MouseEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span>
+		<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
+		<span class="n">jTextField</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="s">" : "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이것을 호출하려면 이전에 만들었던 클래스에
+<code class="language-plaintext highlighter-rouge">this.addMouseListener(new MEventExam(text));</code> 구문을 추가하면 된다.
+여기서 this는 super로 대체 가능하며 JFrame을 칭하는 의미이다.</p>
+
+<p>즉, JFrame을 클릭하면 이 마우스이벤트가 실행되는 것이다.</p>
+
+<p>그러나 방금은 TextField만 넘겨주면 되어서 이 클래스에 text객체를 넘겨주었지만,
+<strong>많은 수정이 필요하거나, 클래스 전체가 객체</strong>로 보내지기를 원한다면</p>
+
+<p><code class="language-plaintext highlighter-rouge">this.addMouseMotionListener(new MDragExam(this));</code> 이러한 형식으로 사용하면 된다.
+이것까지 사용한 것에 대해 전체 코드를 올려보겠다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JFrameExam</span> <span class="kd">extends</span> <span class="nc">JFrame</span> <span class="kd">implements</span> <span class="nc">ActionListener</span><span class="o">{</span>
+	<span class="nc">JButton</span> <span class="n">btn1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JButton</span><span class="o">(</span><span class="s">"클릭1"</span><span class="o">);</span>
+	<span class="nc">JButton</span> <span class="n">btn2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JButton</span><span class="o">(</span><span class="s">"클릭2"</span><span class="o">);</span>
+	<span class="nc">JTextField</span> <span class="n">text</span><span class="o">=</span> <span class="k">new</span> <span class="nc">JTextField</span><span class="o">(</span><span class="s">"재미있네요"</span><span class="o">,</span> <span class="mi">30</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="nf">JFrameExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="s">"JFrame 입니다."</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setSize</span><span class="o">(</span><span class="mi">400</span><span class="o">,</span> <span class="mi">300</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setLocationRelativeTo</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setDefaultCloseOperation</span><span class="o">(</span><span class="nc">JFrame</span><span class="o">.</span><span class="na">EXIT_ON_CLOSE</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="nc">FlowLayout</span><span class="o">());</span>
+		
+		<span class="nc">Container</span> <span class="n">con</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">getContentPane</span><span class="o">();</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">btn1</span><span class="o">);</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">btn2</span><span class="o">);</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+		<span class="n">btn1</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+		<span class="n">btn2</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">addMouseListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">MEventExam</span><span class="o">(</span><span class="n">text</span><span class="o">));</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">addMouseMotionListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">MDragExam</span><span class="o">(</span><span class="k">this</span><span class="o">));</span> <span class="c1">//자기 자신의 주소를 넘겨버림</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="nc">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Object</span> <span class="n">objEvent</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getSource</span><span class="o">();</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">objEvent</span> <span class="o">==</span> <span class="n">btn1</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">text</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"내용 변화"</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">JFrameExam</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">MEventExam</span> <span class="kd">extends</span> <span class="nc">MouseAdapter</span> <span class="o">{</span>
+	<span class="nc">JTextField</span> <span class="n">jTextField</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="nf">MEventExam</span><span class="o">(</span><span class="nc">JTextField</span> <span class="n">jTextField</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">jTextField</span> <span class="o">=</span> <span class="n">jTextField</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">mouseClicked</span><span class="o">(</span><span class="nc">MouseEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span>
+		<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
+		<span class="n">jTextField</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="s">" : "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">MDragExam</span> <span class="kd">extends</span> <span class="nc">MouseMotionAdapter</span> <span class="o">{</span>
+	<span class="nc">JFrameExam</span> <span class="n">jFrameExam</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="nf">MDragExam</span><span class="o">(</span><span class="nc">JFrameExam</span> <span class="n">jFrameExam</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//클래스 전체를 객체로서 사용 가능</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">jFrameExam</span> <span class="o">=</span> <span class="n">jFrameExam</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">mouseDragged</span><span class="o">(</span><span class="nc">MouseEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span>
+		<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
+		<span class="n">jFrameExam</span><span class="o">.</span><span class="na">btn1</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">x</span><span class="o">));</span>
+		<span class="n">jFrameExam</span><span class="o">.</span><span class="na">btn2</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">y</span><span class="o">));</span>
+		
+		<span class="n">jFrameExam</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="s">"x : "</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="s">", y : "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="출력화면">출력화면</h3>
+<p><img src="https://user-images.githubusercontent.com/68142821/108170957-2950bc00-713e-11eb-9b3b-f0f598eef91c.png" alt="print" /></p>
+:ET

@@ -1,0 +1,143 @@
+I"}D<!--page-->
+
+<h1 id="inner-class">Inner class</h1>
+<p>이전 post에서 다른 GUI와 Event처리한 class 파일을 기준으로 설명해보려고 한다.
+Inner class는 간단하게 설명하자면 클래스 안의 클래스가 있는 것이다.</p>
+
+<p>왜 이런 형식을 만드는지 이해가 가지 않을 수도 있지만,
+먼저 장점은 <strong>inner클래스 바깥에 있는 클래스 모든 속성이나 메소드에 접근</strong>할 수 있다.</p>
+
+<p>상속이 없이도 접근 가능한 탓에 자유도는 높지만, 치명적인 단점이 존재하는데
+그것은 <strong>바깥에 있는 클래스의 존재 없이는 사용이 불가능</strong>하다는 것이다.</p>
+
+<p>결국 Inner클래스는 outer클래스에 의존적일 수 밖에 없다.</p>
+
+<p>하지만 이전 post에서 실습 해본 MouseAdapter는 JFrame을 상속받는 클래스의 의존적일 수 밖에 없으므로 Inner클래스 형식으로 바꾸는 작업을 해도 상관없다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">ex0217.inner</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.awt.Container</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.FlowLayout</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.ActionEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.ActionListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.MouseAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.MouseEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.MouseMotionAdapter</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.swing.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JFrameExam</span> <span class="kd">extends</span> <span class="nc">JFrame</span> <span class="kd">implements</span> <span class="nc">ActionListener</span> <span class="o">{</span>
+	<span class="nc">JButton</span> <span class="n">btn1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JButton</span><span class="o">(</span><span class="s">"클릭1"</span><span class="o">);</span>
+	<span class="nc">JButton</span> <span class="n">btn2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JButton</span><span class="o">(</span><span class="s">"클릭2"</span><span class="o">);</span>
+	<span class="nc">JTextField</span> <span class="n">text</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JTextField</span><span class="o">(</span><span class="s">"재미있네요"</span><span class="o">,</span> <span class="mi">30</span><span class="o">);</span>
+
+	<span class="kd">public</span> <span class="nf">JFrameExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="s">"JFrame 입니다."</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setSize</span><span class="o">(</span><span class="mi">400</span><span class="o">,</span> <span class="mi">300</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setLocationRelativeTo</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setDefaultCloseOperation</span><span class="o">(</span><span class="nc">JFrame</span><span class="o">.</span><span class="na">EXIT_ON_CLOSE</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="nc">FlowLayout</span><span class="o">());</span>
+
+		<span class="nc">Container</span> <span class="n">con</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">getContentPane</span><span class="o">();</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">btn1</span><span class="o">);</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">btn2</span><span class="o">);</span>
+		<span class="n">con</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+		<span class="n">btn1</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+		<span class="n">btn2</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">addMouseListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">MEventExam</span><span class="o">());</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">addMouseMotionListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">MDragExam</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="nc">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Object</span> <span class="n">objEvent</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getSource</span><span class="o">();</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">objEvent</span> <span class="o">==</span> <span class="n">btn1</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">text</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"내용 변화"</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">class</span> <span class="nc">MEventExam</span> <span class="kd">extends</span> <span class="nc">MouseAdapter</span> <span class="o">{</span> <span class="c1">//클래스가 내부로 들어오게 되면서 생성자로 받을 필요가 사라졌다.</span>
+											<span class="c1">//위에 있는 모든 속성과 메소드의 접근이 가능하다.</span>
+		<span class="nd">@Override</span>
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">mouseClicked</span><span class="o">(</span><span class="nc">MouseEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span>
+			<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
+			<span class="n">text</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="s">" : "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">class</span> <span class="nc">MDragExam</span> <span class="kd">extends</span> <span class="nc">MouseMotionAdapter</span> <span class="o">{</span>
+
+		<span class="nd">@Override</span>
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">mouseDragged</span><span class="o">(</span><span class="nc">MouseEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span>
+			<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
+			<span class="n">btn1</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">x</span><span class="o">));</span>
+			<span class="n">btn2</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">y</span><span class="o">));</span>
+			
+			<span class="c1">//inner클래스 안에서 outer의 객체를 접근할 때 this, super가 바로 되지 않기 때문에</span>
+			<span class="c1">//다음 문법을 사용해야 한다.</span>
+			<span class="nc">JFrameExam</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="s">"x : "</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="s">", y : "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">JFrameExam</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<h1 id="anonymous-class">Anonymous class</h1>
+<p>익명의 클래스를 가진다는 의미이다.
+우리는 ActionListner를 상속 받았기 때문에 interface 안의 메소드를 재 정의해서 사용하는 것이 필요로 하였다. 그러나 익명의 클래스를 선언하면 <코드1>의 형식은 <코드2>의 형식으로 바뀔 수 있다.</코드2></코드1></p>
+<h3><코드1></코드1></h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">btn1</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+	<span class="n">btn2</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</code></pre></div></div>
+<h3 id="-1"><코드2></코드2></h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">btn1</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">ActionListener</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nd">@Override</span>
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="nc">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">text</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getActionCommand</span><span class="o">()</span> <span class="o">+</span> <span class="s">" 클릭"</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">});</span>
+	<span class="n">btn2</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">ActionListener</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nd">@Override</span>
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="nc">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">text</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getActionCommand</span><span class="o">()</span> <span class="o">+</span> <span class="s">" 클릭"</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">});</span>
+</code></pre></div></div>
+
+<p>더 긴 형식으로 바뀌기 때문에 <코드2>로 바꾸는 것에 대한 의문이 들 수가 있다.
+그러나 우리가 이전에 아래에 Inner클래스로 작성한 것들은 단순히 **일회성**으로 사용하는 클래스들이었고, 재 사용하기에 어려운 부분이 있다고 판단하게 되면, **익명 클래스 선언**을 사용할 수 있다.</코드2></p>
+
+<p>그 아래있는 MouseAdapter를 사용한 부분도 함께 바꿀 수 있다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="k">this</span><span class="o">.</span><span class="na">addMouseListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">MEventExam</span><span class="o">());</span>
+	<span class="k">this</span><span class="o">.</span><span class="na">addMouseMotionListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">MDragExam</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p><strong>익명 클래스</strong>의 구현은 선언과 동시에 기능을 나열하는 것이다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="k">this</span><span class="o">.</span><span class="na">addMouseListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">MouseAdapter</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nd">@Override</span>
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">mouseClicked</span><span class="o">(</span><span class="nc">MouseEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span>
+			<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
+			<span class="n">text</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="s">" : "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">});</span>
+	<span class="k">this</span><span class="o">.</span><span class="na">addMouseMotionListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">MouseMotionAdapter</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nd">@Override</span>
+		<span class="kd">public</span> <span class="kt">void</span> <span class="nf">mouseDragged</span><span class="o">(</span><span class="nc">MouseEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span>
+			<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
+			<span class="n">btn1</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">x</span><span class="o">));</span>
+			<span class="n">btn2</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">y</span><span class="o">));</span>
+			<span class="n">setTitle</span><span class="o">(</span><span class="s">"x : "</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="s">", y : "</span> <span class="o">+</span> <span class="n">y</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">});</span>
+</code></pre></div></div>
+:ET

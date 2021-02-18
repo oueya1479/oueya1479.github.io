@@ -1,0 +1,278 @@
+I"�q<!--page-->
+
+<h1 id="io-stream">IO Stream</h1>
+<blockquote>
+  <p>IOStream을 사용하려면 다음 항목을 추가해야 한다.
+import java.io.*;</p>
+</blockquote>
+
+<p>Java는 Input, Output과 관련된 IOStream API를 제공한다.
+읽기와 쓰기를 동시에 할 수 없으며, <strong>단방향 스트림</strong>이다.</p>
+
+<p>처리를 할 때 여러가지 방법이 있는데 다음과 같다.</p>
+
+<p><strong>byte단위로 처리</strong>
+byte는 영어의 경우 1byte를 차지, 한글의 경우는 2byte를 차지하며, 이와 같은 방식으로 읽어내는 것을 의미한다. <em>(파일 전송, 동영상, 이미지 파일 등의 처리)</em></p>
+<ul>
+  <li>byte단위로 읽기 - InputStream</li>
+  <li>byte단위로 쓰기 - OutputStream</li>
+</ul>
+
+<p><strong>문자단위로 처리</strong>
+영어와 한글 상관 없이 하나의 문자로 처리한다는 것을 의미한다. <em>(채팅프로그램 등)</em></p>
+<ul>
+  <li>문자단위로 읽기 - Reader</li>
+  <li>문자단위로 쓰기 - Writer</li>
+</ul>
+
+<p>용어 정리</p>
+<ul>
+  <li>노드 Stream - 읽기, 쓰기를 바로 할 수 있는 것. 반드시 필요함.</li>
+  <li>필터(보조) Stream - 중간에 읽기 또는 쓰기를 보조stream에 넣어 가공하는 역할. 없어도 읽기, 쓰기 가능 ex) 입출력향상에 도움을 주는 Buffered사용 / byte단위 -&gt; 문자단위로 OR 문자단위 -&gt; byte단위로 변환</li>
+</ul>
+
+<h2 id="file">File</h2>
+<p>읽기 메소드</p>
+<blockquote>
+  <p>~.read()</p>
+</blockquote>
+
+<p>InputStream과 Reader의 각 read()메소드는 같은 의미가 아니다.
+<a href="https://docs.oracle.com/javase/8/docs/api/">Java Platform SE 8</a> 사이트에서 찾아보면 각각 해당하는 의미를 찾아볼 수 있다.</p>
+
+<p>쓰기 메소드</p>
+<blockquote>
+  <p>~.write()</p>
+</blockquote>
+
+<p>OutputStream과 Writer의 각 write()메소드는 같은 의미가 아니다.</p>
+
+<p>File에 대한 IO 코딩 순서는 다음과 같다.
+절대적인 것은 아니지만, 나름의 틀과 순서를 지키는 것이 <strong>프로그램의 규모가 커짐</strong>에 따라 빛을 발할 수 있다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">{</span>
+	<span class="mi">1</span><span class="o">)</span> <span class="n">생성</span>
+	<span class="mi">2</span><span class="o">)</span> <span class="n">읽기</span> <span class="n">또는</span> <span class="n">쓰기</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">()</span> <span class="o">{</span>
+
+<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+	<span class="mi">3</span><span class="o">)</span> <span class="n">닫기</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>하지만 위의 순서를 지키려고 하면 다음과 같은 오류가 발생할 수 있다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">public</span> <span class="nf">FileInputStreamExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">FileInputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"src/ex0218/io/test.txt"</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="n">fis</span><span class="o">.</span><span class="na">close</span><span class="o">();</span> <span class="c1">// 오류 발생! fis가 지역 변수임</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>“src/ex0218/io/text.txt”// 필자는 eclipse를 사용하기 때문에 <strong>현재 실행 중인 패키지</strong>가 기반이 된다.
+이것은 각자가 파일 경로를 새롭게 설정해주어야 한다.</p>
+</blockquote>
+
+<p>fis는 try 내부에서 선언된 지역변수이며, 따라서 finally에서 사용할 수 없는 것이다.
+사용하기 위해서는 밖으로 빼내는 작업이 필요한 것이다.
+그러면 다음 코드로 변환을 해보자.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		<span class="nc">FileInputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"src/ex0218/io/test.txt"</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="n">fis</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+</code></pre></div></div>
+<p>그랬더니 코드가 정말 지저분해 보인다.
+fis.close()는 try구문 안에 있어야 Exception으로 catch가 가능하기 때문에 무조건 try내부에 있어야 한다.
+그러다 보니 finally 안에서 또 다른 try 구문이 발생하고, 점차 코드는 길어져만 간다.
+그래서 나온 문법이다. 다음 코드를 보자.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">public</span> <span class="nf">FileInputStreamExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">(</span><span class="nc">FileInputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"src/ex0218/io/test.txt"</span><span class="o">)){</span>
+
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<p>이는 자동으로 try구문이 끝나게 되면 <strong>‘자동 리소스 닫기’</strong> 기능이 실행된다.
+도중에 예외가 발생이 될 때 자동으로 close()메소드가 호출이 되어 <strong>close()가 실행된 이후</strong> catch블록이 실행이 되는 것이다.</p>
+
+<h2 id="file-여러가지-예제">File 여러가지 예제</h2>
+<p>먼저 InputStream에 대한 예제를 확인한 후에 OutputStream을 사용해보기로 한다.</p>
+
+<h3 id="fileexamjava">FileExam.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileExam</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nf">FileExam</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+		<span class="nc">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="nc">JOptionPane</span><span class="o">.</span><span class="na">showInputDialog</span><span class="o">(</span><span class="s">"파일 이름은?"</span><span class="o">);</span>
+		<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">isDirectory</span><span class="o">())</span> <span class="o">{</span> <span class="c1">//fileName에 해당하는 것이 폴더라면 폴더리스트 출력</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"======="</span> <span class="o">+</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s">"폴더 정보======="</span><span class="o">);</span>
+			<span class="nc">String</span> <span class="n">fnames</span> <span class="o">[]</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">list</span><span class="o">();</span>
+			<span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span> <span class="o">:</span> <span class="n">fnames</span><span class="o">)</span> <span class="o">{</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">//fileName에 해당하는 것이 파일이면 파일에 대한 정보들을 출력</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"======="</span> <span class="o">+</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s">"파일 정보======="</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"읽기기능 = "</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">canRead</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"쓰기기능 = "</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">canWrite</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"파일이름 = "</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"절대경로 = "</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">getAbsolutePath</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"파일크기 = "</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"마지막 수정일 = "</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">lastModified</span><span class="o">());</span>
+			
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">lastModified</span><span class="o">()).</span><span class="na">toLocaleString</span><span class="o">());</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">{</span>
+		<span class="k">new</span> <span class="nf">FileExam</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//결과화면</span>
+<span class="o">=======</span><span class="n">src</span><span class="err">\</span><span class="n">ex0218</span><span class="err">\</span><span class="n">io</span><span class="err">\</span><span class="n">newTextFile</span><span class="o">.</span><span class="na">txt파일</span> <span class="n">정보</span><span class="o">=======</span>
+<span class="n">읽기기능</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">쓰기기능</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">파일이름</span> <span class="o">=</span> <span class="n">newTextFile</span><span class="o">.</span><span class="na">txt</span>
+<span class="n">절대경로</span> <span class="o">=</span> <span class="nl">C:</span><span class="err">\</span><span class="nc">Users</span><span class="err">\</span><span class="n">oueya</span><span class="err">\</span><span class="nc">Desktop</span><span class="err">\</span><span class="n">java</span><span class="err">\</span><span class="nc">JavaWorkspace</span><span class="err">\</span><span class="n">step07_IOExam</span><span class="err">\</span><span class="n">src</span><span class="err">\</span><span class="n">ex0218</span><span class="err">\</span><span class="n">io</span><span class="err">\</span><span class="n">newTextFile</span><span class="o">.</span><span class="na">txt</span>
+<span class="n">파일크기</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">마지막</span> <span class="n">수정일</span> <span class="o">=</span> <span class="mi">1613625682148</span>
+<span class="mi">2021</span><span class="o">.</span> <span class="mi">2</span><span class="o">.</span> <span class="mi">18</span><span class="o">.</span> <span class="n">오후</span> <span class="mi">2</span><span class="o">:</span><span class="mi">21</span><span class="o">:</span><span class="mi">22</span>
+</code></pre></div></div>
+
+<h3 id="fileinputstreamexamjava">FileInputStreamExam.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileInputStreamExam</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nf">FileInputStreamExam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">(</span><span class="nc">FileInputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"src/ex0218/io/test.txt"</span><span class="o">)){</span>
+			<span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">fis</span><span class="o">.</span><span class="na">available</span><span class="o">();</span> <span class="c1">// test.txt에 있는 사용한 공간 알아내어서</span>
+			<span class="kt">byte</span> <span class="n">b</span> <span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">size</span><span class="o">];</span> <span class="c1">//byte의 크기 배열만큼 저장</span>
+			<span class="n">fis</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">b</span><span class="o">);</span> <span class="c1">//b를 이용하여 fis 객체에 읽어들이고</span>
+			<span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">b</span><span class="o">);</span> <span class="c1">//String에서는 바이트를 읽을 수 있도록 String으로 변환하는 기능을 제공한다.</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span><span class="o">);</span> <span class="c1">//그 String에 담긴 내용을 출력</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">FileInputStreamExam</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="filecopyexamjava">FileCopyExam.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileCopyExam</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nf">FileCopyExam</span><span class="o">(</span><span class="nc">String</span> <span class="n">r</span><span class="o">,</span> <span class="nc">String</span> <span class="n">w</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">FileInputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">FileOutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+			<span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">w</span><span class="o">);</span>
+			
+			<span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">fis</span><span class="o">.</span><span class="na">available</span><span class="o">();</span>
+			<span class="kt">byte</span> <span class="o">[]</span> <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">size</span><span class="o">];</span>
+			<span class="n">fis</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+			
+			<span class="c1">//String data = new String(d);</span>
+			<span class="n">fos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="n">fis</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+				<span class="n">fos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">String</span> <span class="n">readFile</span> <span class="o">=</span> <span class="nc">JOptionPane</span><span class="o">.</span><span class="na">showInputDialog</span><span class="o">(</span><span class="s">"읽을 파일 명"</span><span class="o">);</span>
+		<span class="nc">String</span> <span class="n">writeFile</span> <span class="o">=</span> <span class="nc">JOptionPane</span><span class="o">.</span><span class="na">showInputDialog</span><span class="o">(</span><span class="s">"저장할 파일명"</span><span class="o">);</span>
+		<span class="k">new</span> <span class="nf">FileCopyExam</span><span class="o">(</span><span class="n">readFile</span><span class="o">,</span> <span class="n">writeFile</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+<p>항상 메소드나 알아야 하는 클래스가 존재한다면 api docs를 무조건 참고하는 편이다.
+꼭 참고하도록 하자.</p>
+
+<h2 id="보조stream">보조Stream</h2>
+<p>아까 정리했던 byte단위 Stream과 문자 단위 Stream을 정리했었다.
+보조Stream은 다음과 같이 바뀐다.</p>
+
+<p>**<byte단위로 처리="">**</byte단위로></p>
+<ul>
+  <li>byte단위로 읽기 - InputStream -&gt; BufferedInputStream</li>
+  <li>byte단위로 쓰기 - OutputStream -&gt; BufferedOutputStream</li>
+</ul>
+
+<p>**<문자단위로 처리="">**</문자단위로></p>
+<ul>
+  <li>문자단위로 읽기 - Reader -&gt; BufferedReader</li>
+  <li>문자단위로 쓰기 - Writer -&gt; BufferedWriter</li>
+</ul>
+
+<p>그래서 위에서 그저 사용했었던 FileInputStream을 BufferedInputStream으로 바꾸어 줌으로써
+속도로 이득을 볼 수 있다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileCopyBufferedExam</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nf">FileCopyBufferedExam</span><span class="o">(</span><span class="nc">String</span> <span class="n">r</span><span class="o">,</span> <span class="nc">String</span> <span class="n">w</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">BufferedInputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">BufferedOutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">r</span><span class="o">));</span>
+			<span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">w</span><span class="o">));</span>
+			
+			<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+			<span class="k">while</span><span class="o">((</span><span class="n">i</span> <span class="o">=</span> <span class="n">fis</span><span class="o">.</span><span class="na">read</span><span class="o">())</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">fos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="n">fis</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+				<span class="n">fos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">String</span> <span class="n">readFile</span> <span class="o">=</span> <span class="nc">JOptionPane</span><span class="o">.</span><span class="na">showInputDialog</span><span class="o">(</span><span class="s">"읽을 파일 명"</span><span class="o">);</span>
+		<span class="nc">String</span> <span class="n">writeFile</span> <span class="o">=</span> <span class="nc">JOptionPane</span><span class="o">.</span><span class="na">showInputDialog</span><span class="o">(</span><span class="s">"저장할 파일명"</span><span class="o">);</span>
+		
+		<span class="kt">long</span> <span class="n">startTime</span><span class="o">;</span>
+		<span class="kt">long</span> <span class="n">endTime</span><span class="o">;</span>
+		
+		<span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+		<span class="k">new</span> <span class="nf">FileCopyBufferedExam</span><span class="o">(</span><span class="n">readFile</span><span class="o">,</span> <span class="n">writeFile</span><span class="o">);</span>
+		<span class="n">endTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">endTime</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Buffered으로 바꾸었더니 700KB정도 되는 사진을 복사했을 때 무려
+4105883900 - 39798600 = 4066085300 즉, <strong>4.0660853초 차이</strong>가 발생했다.</p>
+
+<p>700KB밖에 안되어도 복사하고 붙여 넣는데 4초의 시간 차이가 발생한다.</p>
+
+<h2 id="키보드-입력">키보드 입력</h2>
+<p>키보드 입력은 기본적으로 InputStream이기 때문에
+Reader으로 변환하는 과정이 필요로 하다.
+그때 사용하는 것이 보조Stream이며 <strong>InputStreamReader을 사용</strong>하면 된다.</p>
+:ET
