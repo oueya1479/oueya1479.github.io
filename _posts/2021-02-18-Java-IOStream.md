@@ -219,11 +219,11 @@ public class FileCopyExam {
 아까 정리했던 byte단위 Stream과 문자 단위 Stream을 정리했었다.
 보조Stream은 다음과 같이 바뀐다.
 
-**<byte단위로 처리>**
+**byte단위로 처리**
 - byte단위로 읽기 - InputStream -> BufferedInputStream
 - byte단위로 쓰기 - OutputStream -> BufferedOutputStream 
 
-**<문자단위로 처리>**
+**문자단위로 처리**
 - 문자단위로 읽기 - Reader -> BufferedReader
 - 문자단위로 쓰기 - Writer -> BufferedWriter
 
@@ -278,3 +278,21 @@ Buffered으로 바꾸었더니 700KB정도 되는 사진을 복사했을 때 무
 키보드 입력은 기본적으로 InputStream이기 때문에
 Reader으로 변환하는 과정이 필요로 하다.
 그때 사용하는 것이 보조Stream이며 **InputStreamReader을 사용**하면 된다.
+```java
+public class KeyBoardInputExam {
+	public KeyBoardInputExam() {
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("입력 > ");
+			String str = br.readLine();
+			System.out.println("결과 : " + str);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		new KeyBoardInputExam();
+	}
+}
+```
